@@ -6,11 +6,14 @@ import { BiTime } from 'react-icons/bi';
 export const NavBar = (props) => {
     const divStyle = {
         display: 'inline-block',
-        margin: '10% 25% 0% 25%'
+        marginTop: '10%',
+        marginRight: '20%',
+        marginLeft: '20%',
+        width: '80%'
     }
     const NavLinkStyle = {
-        margin: 20,
-        fontSize: 20,
+        margin: 15,
+        fontSize: '1.2em',
         fontStyle: 'none',
         textDecoration: 'none',
         color: 'grey'
@@ -21,10 +24,10 @@ export const NavBar = (props) => {
                 <BsTag/>{props.selectedType === '' ? 'Type' : props.selectedType}
             </NavLink>
             <NavLink style={NavLinkStyle} to={'/people'}>
-                <BsPerson/>People
+                <BsPerson/>{props.peopleAmount === 0 ? 'People' : props.peopleAmount === 1 ? '1 person' : `${props.peopleAmount} persons`}
             </NavLink>
             <NavLink style={NavLinkStyle} to={'/date'}>
-                <BsCalendarWeek/>Date
+                <BsCalendarWeek/>{props.selectedDate === null ? 'Date' : props.selectedDate}
             </NavLink>
             <NavLink style={NavLinkStyle} to={'/time'}>
                 <BiTime/>Time

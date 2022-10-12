@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+body {
+  height: 100%;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -49,7 +53,7 @@ a.active {
   border-radius: 10px;
   padding: 15px;
   font-size: 20px;
-  width: 80%;
+  width: 50%;
 }
 
 .Next {
@@ -59,7 +63,16 @@ a.active {
   border-radius: 10px;
   padding: 15px;
   font-size: 20px;
+  font-weight: bold;
   width: 15%;
+  background-color: whitesmoke;
+}
+
+.Next:hover {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
 }
 
 .type:hover {
