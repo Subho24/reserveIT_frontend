@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+a.active {
+  font-weight: bold;
+  color: black;
+}
+
+.type {
+  margin: 20px auto auto auto;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 20px;
+  width: 80%;
+}
+
+.Next {
+  margin: 80px auto auto auto;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 20px;
+  width: 15%;
+}
+
+.type:hover {
+  box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+}
+
