@@ -1,10 +1,10 @@
 export const Confirmation = (props) => {
     return (
-        <div style={{textAlign: 'center'}}>
-            <h1>Type: {props.selectedType} </h1>
-            <h1>Number of people: {props.peopleAmount} </h1>
-            <h1>Date: {props.selectedDate} </h1>
-            <h1>Time: {props.selectedTime} </h1>
+        <div className="detailsContainer" >
+            <p className="confirmType" >Type: {props.selectedType} </p>
+            <p className="confirmPeople" >Number of people: {props.peopleAmount} </p>
+            <p className="confirmDate" >Date: {props.selectedDate} </p>
+            <p className="confirmTime" >Time: {props.selectedTime} </p>
         </div>
     )
 }

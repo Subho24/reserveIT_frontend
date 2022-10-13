@@ -9,7 +9,7 @@ export const TypeForm = (props) => {
 
     const types = props.AvailableTypes;
     return (
-        <div>
+        <div className="typeContainer">
             {
                 types.map((type) => {
                     return(

@@ -1,7 +1,7 @@
 import './App.css';
 import japaneseRestaurant from './japaneseRestaurant.png';
-import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom';
 import { Header } from './components/Header';
 import { NavBar } from './components/NavBar';
 import { TypeForm } from './components/typeForm';
@@ -22,12 +22,24 @@ function App() {
     'Dinner'
   ]
 
+
+  useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+  
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+
   return (
     <Router>
       <Header RestaurantName="Sakanaya" />
       <main style={{display: 'flex', width: '100%', height: '100%'}}>
-        <div className='restaurantImage' style={{width:'40%', height: '100%', padding: '20px 0px 20px 20px'}}>
-          <img src={japaneseRestaurant} width={600} height={800} alt='Restaurant' />
+        <div className='restaurantImage' style={{ padding: '50px 0px 50px 80px'}}>
+          <img src={japaneseRestaurant} width={450} height={600} alt='Restaurant' />
         </div>
         <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
           <NavBar 

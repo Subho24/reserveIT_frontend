@@ -5,6 +5,11 @@ export const PeopleForm = (props) => {
     const navigate = useNavigate();
     const handleOnClick = ({target}) => {
         const inputValue = document.getElementById('peopleAmount')
+        console.log(inputValue.value)
+        if(inputValue.value === '') {
+            alert('Please select the number of people')
+            return
+        }
         props.setPeopleAmount(inputValue.value)
         navigate('/date')
     }

@@ -4,6 +4,7 @@
 
 body {
   height: 100%;
+  width: 100%;
 }
 
 .App-logo {
@@ -52,8 +53,8 @@ a.active {
   border: 2px solid black;
   border-radius: 10px;
   padding: 15px;
-  font-size: 20px;
-  width: 50%;
+  font-size: 0.8em;
+  width: 30%;
 }
 
 .Next {
@@ -64,7 +65,7 @@ a.active {
   padding: 15px;
   font-size: 20px;
   font-weight: bold;
-  width: 15%;
+  min-width: 150px;
   background-color: whitesmoke;
 }
 
@@ -79,3 +80,68 @@ a.active {
   box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
 }
 
+.detailsContainer {
+  display: grid;
+  grid-template-areas: 
+  'type people'
+  'date time';
+  font-size: 0.8em;
+  padding: 100px;
+  gap: 10px;
+}
+
+.confirmType {
+  grid-area: type;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+}
+.confirmPeople {
+  grid-area: people;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+}
+.confirmDate {
+  grid-area: date;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+}
+.confirmTime {
+  grid-area: time;
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .restaurantImage {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .bookingForm {
+    display: flex;
+  }
+  .NavBar a {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .typeContainer {
+    margin-top: 10%;
+  }
+  .type {
+    width: 80%;
+    margin-top: 10%;
+  }
+}
+
+.NavBar {
+  display: 'inline-block';
+  text-align: 'center';
+  margin-top: 10%;
+  font-size: 0.8em;
+}
