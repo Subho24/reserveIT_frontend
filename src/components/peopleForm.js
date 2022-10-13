@@ -14,7 +14,7 @@ export const PeopleForm = (props) => {
             <h1>How many people?</h1>
             <div style={{display: 'inline-flex', fontSize: 30, margin: '0% 25% 0% 20%'}}>
                 <BsPeople style={{margin: 5}}/>
-                <input type={'number'} style={{fontSize: 25}} min={0} max={6} id='peopleAmount' />
+                <input type={'number'} style={{fontSize: 25, width: 150}} min={0} max={6} id='peopleAmount' />
             </div>
             <br/>
             <input type='submit' className='Next' value={'Next'} onClick={handleOnClick} />

@@ -9,7 +9,6 @@ export const NavBar = (props) => {
         marginTop: '10%',
         marginRight: '20%',
         marginLeft: '20%',
-        width: '80%'
     }
     const NavLinkStyle = {
         margin: 15,
@@ -30,7 +29,7 @@ export const NavBar = (props) => {
                 <BsCalendarWeek/>{props.selectedDate === null ? 'Date' : props.selectedDate}
             </NavLink>
             <NavLink style={NavLinkStyle} to={'/time'}>
-                <BiTime/>Time
+                <BiTime/>{props.selectedTime === null ? 'Time' : props.selectedTime}
             </NavLink>
             <NavLink style={NavLinkStyle} to={'/confirm'}>
                 <BsCalendarCheck/>Confirm
