@@ -115,6 +115,14 @@ a.active {
   padding: 10px;
 }
 
+.customerDetails {
+  display: grid;
+  grid-template-areas: 
+  'firstName lastName'
+  'email email'
+  'phone phone';
+}
+
 @media screen and (max-width: 1200px) {
   .restaurantImage {
     display: none;

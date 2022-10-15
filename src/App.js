@@ -1,7 +1,7 @@
 import './App.css';
 import japaneseRestaurant from './japaneseRestaurant.png';
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useNavigate} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Header } from './components/Header';
 import { NavBar } from './components/NavBar';
 import { TypeForm } from './components/typeForm';
