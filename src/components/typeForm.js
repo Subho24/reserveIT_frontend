@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const TypeForm = (props) => {
+    const { restaurantId } = useParams();
+    console.log(restaurantId)
     const navigate = useNavigate();
     const handleOnClick = ({target}) => {
         props.setSelectedType(target.innerText)

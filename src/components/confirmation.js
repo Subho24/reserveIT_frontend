@@ -11,6 +11,7 @@ export const Confirmation = (props) => {
     const [timeLenthAgreed, setTimeLengthAgreed] = useState(false);
 
     const toggleTimeAgreement = () => {
+        console.log(timeLenthAgreed);
         !timeLenthAgreed ? setTimeLengthAgreed(true) : setTimeLengthAgreed(false);
     }
 
@@ -41,7 +42,7 @@ export const Confirmation = (props) => {
                         onChange={({target}) => setCustomerComments(target.value)}
                     />
                     <FormControl>
-                        <FormControlLabel control={<Checkbox onChange={({target}) => toggleTimeAgreement}/>} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
+                        <FormControlLabel control={<Checkbox onChange={() => toggleTimeAgreement()}/>} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
                     </FormControl>
                 </div>
                 <input type='submit' className='Next' value={'Book'} onClick={() => {

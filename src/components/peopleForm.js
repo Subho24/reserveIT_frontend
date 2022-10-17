@@ -23,7 +23,7 @@ export const PeopleForm = (props) => {
             </div>
             <br/>
             <input type='submit' className='Next' value={'Next'} onClick={handleOnClick} />
-            <p style={{marginTop: 100, fontSize: 20, color: 'grey'}}>More than 6 people? Send a mail to <a href={'https'}>subhojitan@gmail.com</a> </p>
+            <p style={{marginTop: 100, fontSize: 20, color: 'grey'}}>More than 6 people? Send a mail to <a href={'https'}>{props.contactPersonEmail}</a> </p>
         </div>
     )
 }
