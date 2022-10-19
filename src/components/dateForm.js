@@ -1,12 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
 export const DateForm = (props) => {
-    const navigate = useNavigate();
     const handleOnClick = () => {
         const inputValue = document.getElementById('date').value;
         props.setSelectedDate(inputValue);
         console.log(inputValue)
-        navigate('/time')
+        props.setStepCount(4);
     }
 
     const date = new Date()
@@ -14,7 +13,7 @@ export const DateForm = (props) => {
     console.log(today)
 
     return (
-        <div style={{textAlign: 'center', fontSize: 30, fontWeight: 'bold', marginTop: 50}}>
+        <div style={{textAlign: 'center', fontSize: 30, fontWeight: 'bold', marginTop: 100}}>
             <label for='date'>
                     When would you like to visit us?
             </label>

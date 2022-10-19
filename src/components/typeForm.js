@@ -1,15 +1,13 @@
-import { useNavigate } from "react-router-dom";
 
 export const TypeForm = (props) => {
-    const navigate = useNavigate();
     const handleOnClick = ({target}) => {
         props.setSelectedType(target.innerText)
-        navigate('/people')
+        props.setStepCount(2);
     }
 
     const types = props.AvailableTypes;
     return (
-        <div className="typeContainer">
+        <div className="typeContainer" style={{marginTop: 100}} >
             {
                 types.map((type) => {
                     return(

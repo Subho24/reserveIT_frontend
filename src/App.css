@@ -86,7 +86,7 @@ a.active {
   'type people'
   'date time';
   font-size: 0.8em;
-  padding: 100px;
+  padding: 100px 100px 50px 100px;
   gap: 10px;
 }
 

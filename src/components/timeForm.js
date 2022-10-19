@@ -3,17 +3,16 @@ import { BsClock } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
 export const TimeForm = (props) => {
-    const navigate = useNavigate();
     const openedHours = (props.closingTime - props.openingTime);
     const bookableTimes = getBookableTimes(props.openingTime, openedHours);
     let inputValue = null;
     const handleOnClick = () => {
         inputValue === null ? props.setSelectedTime(null) : props.setSelectedTime(inputValue);
-        navigate('/confirm')
+        props.setStepCount(5);
     }
 
     return (
-        <div>
+        <div style={{marginTop: 100}} >
             <h1>Which time?</h1>
             <div style={{display: 'flex',width: 150, margin: 'auto', marginTop: 50}}>
                 <BsClock style={{fontSize: 30, marginRight: 5}}/>

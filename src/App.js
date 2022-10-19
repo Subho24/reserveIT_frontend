@@ -9,9 +9,13 @@ import { PeopleForm } from './components/peopleForm';
 import { DateForm } from './components/dateForm';
 import { TimeForm } from './components/timeForm';
 import { Confirmation } from './components/confirmation';
+import { Footer } from './components/Footer'
+import { Loading } from './components/Loading';
 
 
 function App() {
+  const [stepCount, setStepCount] = useState(1)
+  const [companyInfo, setCompanyInfo] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const [peopleAmount, setPeopleAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null)
@@ -36,33 +40,42 @@ function App() {
 
   return (
     <Router>
-      <Header RestaurantName="Sakanaya" />
-      <main style={{display: 'flex', width: '100%', height: '100%'}}>
-        <div className='restaurantImage' style={{ padding: '50px 0px 50px 80px'}}>
-          <img src={japaneseRestaurant} width={450} height={600} alt='Restaurant' />
-        </div>
-        <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
-          <NavBar 
-            selectedType={selectedType}
-            peopleAmount={peopleAmount}
-            selectedDate={selectedDate}
-            selectedTime={selectedTime}
-          />
-          <Routes>
-            <Route path='/book' element={<TypeForm AvailableTypes={availableTypes} setSelectedType={setSelectedType} />} />
-            <Route path='/people' element={<PeopleForm peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} />} />
-            <Route path='/date' element={<DateForm selectedDate={selectedDate} setSelectedDate={setSelectedDate} />} />
-            <Route path='/time' element={<TimeForm openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} />} />
-            <Route path='/confirm' element={<Confirmation 
-              selectedType={selectedType}   
-              selectedTime={selectedTime} 
-              peopleAmount={peopleAmount}
-              selectedDate={selectedDate}
-              />}
-            />
-          </Routes>
-        </div>
-      </main>
+      <Routes>
+        <Route path='/book/:companyId' element={companyInfo === null ? 
+          <Loading setCompanyInfo={setCompanyInfo} /> :
+          <>
+            <Header companyInfo={companyInfo} RestaurantName="Sakanaya" setCompanyInfo={setCompanyInfo} />
+            <main style={{display: 'flex', width: '100%', height: '100%'}}>
+              <div className='restaurantImage' style={{ padding: '50px 0px 50px 80px'}}>
+                <img src={japaneseRestaurant} width={450} height={600} alt='Restaurant' />
+              </div>
+              <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
+                <NavBar 
+                  selectedType={selectedType}
+                  peopleAmount={peopleAmount}
+                  selectedDate={selectedDate}
+                  selectedTime={selectedTime}
+                  setStepCount={setStepCount}
+                />
+                {
+                  stepCount === 1 ? <TypeForm companyInfo={companyInfo} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
+                  stepCount === 2 ? <PeopleForm companyInfo={companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} /> :
+                  stepCount === 3 ? <DateForm companyInfo={companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
+                  stepCount === 4 ? <TimeForm companyInfo={companyInfo} openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} /> :
+                  <Confirmation 
+                    selectedType={selectedType}   
+                    selectedTime={selectedTime} 
+                    peopleAmount={peopleAmount}
+                    selectedDate={selectedDate}
+                    setStepCount={setStepCount}
+                  />
+                }
+              </div>
+            </main>
+            <Footer />
+          </>
+        } />
+      </Routes>
     </Router>
   );
 }
