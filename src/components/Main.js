@@ -8,9 +8,10 @@ import { PeopleForm } from './peopleForm';
 import { DateForm } from './dateForm';
 import { TimeForm } from './timeForm';
 import { Confirmation } from './confirmation';
+
 import axios from 'axios';
 
-export const Main = () => {
+export const Main = (props) => {
     const [selectedType, setSelectedType] = useState('');
     const [peopleAmount, setPeopleAmount] = useState(0);
     const [selectedDate, setSelectedDate] = useState(null)
@@ -23,9 +24,10 @@ export const Main = () => {
     const { pathname } = useLocation();
     const { restaurantId } = useParams();
     console.log(pathname)
+    console.log(props.elementToRender)
 
     return (
-        <div>
+      <div>
         <Header RestaurantName="Sakanaya" />
         <main style={{display: 'flex', width: '100%', height: '100%'}}>
           <div className='restaurantImage' style={{ padding: '50px 0px 50px 80px'}}>
@@ -39,19 +41,20 @@ export const Main = () => {
               selectedTime={selectedTime}
             />
             {
-                pathname === `${pathname}/type` ? <TypeForm AvailableTypes={availableTypes} setSelectedType={setSelectedType} /> :
-                pathname === `${pathname}/people` ? <PeopleForm peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} /> :
-                pathname === `${pathname}/people` ? <DateForm selectedDate={selectedDate} setSelectedDate={setSelectedDate} />:
-                pathname === `${pathname}/people` ? <TimeForm openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} /> :
-                pathname === `${pathname}/people` ? <Confirmation 
-                                                        selectedType={selectedType}   
-                                                        selectedTime={selectedTime} 
-                                                        peopleAmount={peopleAmount}
-                                                        selectedDate={selectedDate}
-                                                    /> : ''
+              props.elementToRender === 'type' ? <TypeForm AvailableTypes={availableTypes} setSelectedType={setSelectedType} setElementToRender={props.setElementToRender} /> :
+              props.elementToRender === 'people' ? <PeopleForm peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setElementToRender={props.setElementToRender} /> :
+              props.elementToRender === 'date' ? <DateForm selectedDate={selectedDate} setSelectedDate={setSelectedDate} setElementToRender={props.setElementToRender} /> :
+              props.elementToRender === 'time' ? <TimeForm openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setElementToRender={props.setElementToRender} /> :
+              <Confirmation 
+                  selectedType={selectedType}   
+                  selectedTime={selectedTime} 
+                  peopleAmount={peopleAmount}
+                  selectedDate={selectedDate}
+              />
             }
           </div>
         </main>
+
       </div>
     )
 }

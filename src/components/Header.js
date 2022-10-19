@@ -1,24 +1,21 @@
 import logo from '../logo_UK.webp'
-import { useEffect } from 'react'
-import axios from 'axios'
-
-const wrapperStyle = {
-    textAlign: "center", 
-    display: 'inline-block', 
-    width:'100%', 
-    border: '2px solid grey', 
-    borderStyle: 'none none solid none' 
-}
-
-const imgStyle = {
-    width: 30, 
-    height: 30, 
-    borderRadius: 15, 
-    float: 'right', 
-    margin: 20
-}
 
 export const Header = (props) => {
+    const wrapperStyle = {
+        textAlign: "center", 
+        display: 'inline-block', 
+        width:'100%', 
+        border: '2px solid grey', 
+        borderStyle: 'none none solid none' 
+    }
+
+    const imgStyle = {
+        width: 30, 
+        height: 30, 
+        borderRadius: 15, 
+        float: 'right', 
+        margin: 20
+    }
 
     return (
         <div style={wrapperStyle}>
