@@ -15,16 +15,12 @@ import { Loading } from './components/Loading';
 
 function App() {
   const [stepCount, setStepCount] = useState(1)
+  const [availableTypes, setAvailableTypes] = useState([]);
   const [companyInfo, setCompanyInfo] = useState(null);
   const [selectedType, setSelectedType] = useState('');
   const [peopleAmount, setPeopleAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
-  const availableTypes = [
-    'Breakfast',
-    'Lunch',
-    'Dinner'
-  ]
 
 
   useEffect(() => {
@@ -42,7 +38,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/book/:companyId' element={companyInfo === null ? 
-          <Loading setCompanyInfo={setCompanyInfo} /> :
+          <Loading setCompanyInfo={setCompanyInfo} api="http://localhost:4000/api/companies/" /> :
           <>
             <Header companyInfo={companyInfo} RestaurantName="Sakanaya" setCompanyInfo={setCompanyInfo} />
             <main style={{display: 'flex', width: '100%', height: '100%'}}>
@@ -58,7 +54,7 @@ function App() {
                   setStepCount={setStepCount}
                 />
                 {
-                  stepCount === 1 ? <TypeForm companyInfo={companyInfo} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
+                  stepCount === 1 ? <TypeForm setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
                   stepCount === 2 ? <PeopleForm companyInfo={companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} /> :
                   stepCount === 3 ? <DateForm companyInfo={companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
                   stepCount === 4 ? <TimeForm companyInfo={companyInfo} openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} /> :
