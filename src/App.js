@@ -55,9 +55,9 @@ function App() {
                 />
                 {
                   stepCount === 1 ? <TypeForm setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
-                  stepCount === 2 ? <PeopleForm companyInfo={companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} /> :
+                  stepCount === 2 ? <PeopleForm companyInfo={companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
                   stepCount === 3 ? <DateForm companyInfo={companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-                  stepCount === 4 ? <TimeForm companyInfo={companyInfo} openingTime={11} closingTime={20} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} /> :
+                  stepCount === 4 ? <TimeForm companyInfo={companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
                   <Confirmation 
                     selectedType={selectedType}   
                     selectedTime={selectedTime} 

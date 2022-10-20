@@ -1,11 +1,22 @@
 import Select from 'react-select';
 import { BsClock } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 
 export const TimeForm = (props) => {
-    const openedHours = (props.closingTime - props.openingTime);
-    const bookableTimes = getBookableTimes(props.openingTime, openedHours);
+    const { companyId } = useParams()
+    const [availableTimes, setAvailableTimes] = useState([]);
     let inputValue = null;
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/api/booking_instructions/${companyId}/`).then(response => {
+            response.data.map(item => {
+                if(item.booking_type === props.selectedType) { setAvailableTimes(getAvailableTimes(item.booking_type_start, item.booking_type_end )) }
+            })
+        })
+    }, [])
+
     const handleOnClick = () => {
         inputValue === null ? props.setSelectedTime(null) : props.setSelectedTime(inputValue);
         props.setStepCount(5);
@@ -20,7 +31,7 @@ export const TimeForm = (props) => {
                     backspaceRemovesValue = {true}
                     isClearable={false}
                     isSearchable={false}
-                    options={bookableTimes}
+                    options={availableTimes}
                     isDisabled={false}
                     onChange={(e) => inputValue = e.value}
                 />
@@ -30,15 +41,29 @@ export const TimeForm = (props) => {
     )
 }
 
-const getBookableTimes = (openingTime, hours) => {
-    let startTime = openingTime
-    const bookableHours = [];
-    for (let i = 0; i < hours; i++) {
-      bookableHours.push({value: `${startTime}:00`, label:`${startTime}:00` })
-      bookableHours.push({value: `${startTime}:30`, label:`${startTime}:30` })
-      startTime++
+const getAvailableTimes = (startTime, endTime) => {
+    const date = new Date();
+    const formatedDate = `${date.getFullYear}-${date.getMonth() + 1}-${date.getDate()}`;
+    let startHour = new Date(`${formatedDate}, ${startTime}`).getHours();
+    const endHour = new Date(`${formatedDate}, ${endTime}`).getHours();
+    const totalHours = endHour - startHour;
+    const arr = [];
+    for(let i = 0; i < totalHours; i++) {
+      if(startTime.includes("30")) {
+        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
+        startHour++
+        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
+        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
+        startHour++
+        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
+        if(`${startHour}:30` === endTime || `${startHour}:00` === endTime ) break;
+      } else {
+        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
+        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
+        startHour++
+        if(`${startHour}:30` === endTime || `${startHour}:00` === endTime ) break;
+      }
     }
-
-    return bookableHours;
-  } 
+    return arr;
+}
 
