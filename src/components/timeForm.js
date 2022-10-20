@@ -1,6 +1,6 @@
 import Select from 'react-select';
 import { BsClock } from 'react-icons/bs';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 

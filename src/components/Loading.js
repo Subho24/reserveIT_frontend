@@ -8,7 +8,6 @@ export const Loading = (props) => {
 
     useEffect(() => {
         axios.get(`${props.api}${companyId}`).then(response => {
-            console.log(response.data[0])
             props.setCompanyInfo(response.data[0]);
         })
     }, [])
