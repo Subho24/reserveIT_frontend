@@ -1,9 +1,16 @@
 import { Box } from "@mui/system"
 import { TextField } from "@mui/material"
-import { Checkbox, FormControl, FormControlLabel } from "@mui/material"
+import { Checkbox, FormControl, FormControlLabel, Modal } from "@mui/material"
 import { useState } from "react"
+import axios from "axios"
+import { useParams } from "react-router-dom"
+import { BsCheckCircle } from 'react-icons/bs'
+import { BiError } from 'react-icons/bi'
 
 export const Confirmation = (props) => {
+    const { companyId } = useParams();
+    const [bookingStatus, setBookingStatus ] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
     const [customerName, setCustomerName] = useState(null);
     const [customerPhone, setCustomerPhone] = useState(null);
     const [customerEmail, setCustomerEmail] = useState(null);
@@ -13,6 +20,78 @@ export const Confirmation = (props) => {
     const toggleTimeAgreement = () => {
         !timeLenthAgreed ? setTimeLengthAgreed(true) : setTimeLengthAgreed(false);
     }
+
+    const submitData = () => {
+        axios.post('http://localhost:4000/api/bookings', {
+            "company_id": companyId,
+            "booking_type": props.selectedType,
+            "booking_date": props.selectedDate,
+            "booking_time": props.selectedTime,
+            "booking_comments": customerComments,
+            "number_of_people": props.peopleAmount,
+            "customer_name": customerName,
+            "customer_mobile": customerPhone,
+            "customer_email": customerEmail
+        }).then(res => {
+            console.log(res.data)
+            setModalOpen(true)
+            setBookingStatus('success')
+        }).catch(err => {
+            console.log(err);
+            setModalOpen(true)
+        })
+    }
+
+    const closeModal = () => {
+        setModalOpen(false)
+        props.setStepCount(1)
+        window.location.reload();
+    }
+
+    const modalContent = bookingStatus === 'success' ?
+    (
+        <div className="confirmModal" style={{
+            display: 'flex',
+            position: 'absolute',
+            width: 400,
+            top: '40%',
+            left: '35%',
+            textAlign: 'center',
+            backgroundColor: 'whitesmoke',
+            flexDirection: 'column',
+            borderRadius: 30
+        }}>
+            <h1>Booking confirmed</h1>
+            <BsCheckCircle style={{
+                fontSize: 50,
+                color: 'green',
+                margin: 'auto'
+            }} />
+            <button className="Next" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Okay</button>
+        </div>
+    ) : (
+        <div className="confirmModal" style={{
+            display: 'flex',
+            position: 'absolute',
+            width: 400,
+            top: '25%',
+            left: '35%',
+            textAlign: 'center',
+            backgroundColor: 'whitesmoke',
+            flexDirection: 'column',
+            borderRadius: 30
+        }}>
+            <h1>Error!!</h1>
+            <h3>Something went wrong!!</h3>
+            <h3>Please try again later</h3>
+            <BiError style={{
+                fontSize: 50,
+                color: 'red',
+                margin: 'auto'
+            }} />
+            <button className="Next" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Close</button>
+        </div>
+    )
 
     return (
         <div>
@@ -41,29 +120,14 @@ export const Confirmation = (props) => {
                         onChange={({target}) => setCustomerComments(target.value)}
                     />
                     <FormControl>
-                        <FormControlLabel control={<Checkbox onChange={({target}) => toggleTimeAgreement}/>} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
+                        <FormControlLabel control={<Checkbox onChange={() => toggleTimeAgreement}/>} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
                     </FormControl>
                 </div>
-                <input type='submit' className='Next' value={'Book'} onClick={() => {
-                    console.log({
-                        customerName: customerName,
-                        customerPhone: customerPhone,
-                        customerEmail: customerEmail,
-                        customerComments: customerComments,
-                        selectedType: props.selectedType,
-                        peopleAmount: props.peopleAmount,
-                        selectedTime: props.selectedTime,
-                        selectedDate: props.selectedDate,
-                        timeLenthAgreed: timeLenthAgreed
-                    })
-                }}/>
+                <input type='submit' className='Next' value={'Book'} onClick={submitData}/>
+                <Modal open={modalOpen} >
+                    {modalContent}
+                </Modal>
             </Box>
-            {/* <div className="customerDetails">
-                    <input id="firstName" placeholder="First Name" type={"text"} style={{fontSize: '1em', width: 150, gridArea: 'firstName'}} />
-                    <input id="lastName" placeholder="Last Name" type={"text"} style={{fontSize: '1em', width: 150, gridArea: 'lastName'}} />
-                    <input id="email" placeholder="Email" type={"email"} style={{fontSize: '1em', width: 150, gridArea: 'email'}} />
-                    <input id="phoneNumber" placeholder="Mobiles" type={"tel"} style={{fontSize: '1em', width: 150, gridArea: 'phone'}} />
-            </div> */}
         </div>
     )
 }

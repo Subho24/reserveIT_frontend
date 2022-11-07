@@ -11,7 +11,17 @@ export const TypeForm = (props) => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/booking_instructions/${companyId}/?custom=booking_type`).then(response => {
+        const config = {
+            method: 'get',
+            url: `http://localhost:4000/api/booking_instructions/${companyId}/?custom=booking_type`,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({
+                accessKey: process.env.REACT_APP_ACCESS_KEY_2
+            })
+        }
+        axios(config).then(response => {
             const typesArray = response.data.map(type => type.booking_type);
             props.setAvailableTypes(typesArray)
         })

@@ -56,12 +56,15 @@ const getAvailableTimes = (startTime, endTime) => {
         arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
         startHour++
         arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
-        if(`${startHour}:30` === endTime || `${startHour}:00` === endTime ) break;
+        if(startHour === endHour ) break;
       } else {
         arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
         arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
         startHour++
-        if(`${startHour}:30` === endTime || `${startHour}:00` === endTime ) break;
+        if(startHour === endHour) {
+            arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
+            break;
+        };
       }
     }
     return arr;
