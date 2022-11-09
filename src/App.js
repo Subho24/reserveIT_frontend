@@ -26,7 +26,7 @@ function App() {
     <Router>
       <Routes>
         <Route path='/login' element={<Login setAccessToken={setAccessToken} />} />
-        <Route path='/:companyId' element={<Home token={accessToken} /> } />
+        <Route path='/dashboard/:companyId' element={<Home token={accessToken} /> } />
         <Route path='/book/:companyId' element={<Book companyInfo={companyInfo} setCompanyInfo={setCompanyInfo} /> } />
       </Routes>
     </Router>

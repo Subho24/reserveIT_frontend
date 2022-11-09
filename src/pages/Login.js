@@ -19,7 +19,7 @@ export const Login = (props) => {
             sessionStorage.setItem('accessToken', token)
 
             const decoded = jwtDecode(token);
-            nav(`/${decoded.companyId}`)
+            nav(`/dashboard/${decoded.companyId}`)
         })
         .catch(err => {
             console.log(err);

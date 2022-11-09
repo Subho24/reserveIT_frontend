@@ -9,7 +9,7 @@ export const Home = (props) => {
         <>
             <Header />
             <Box style={{minHeight: '100vh', margin: '0px 20px 0 20px'}} >
-                <BookingList token={props.token} />
+                <BookingList token={props.token} userId={props.userId} />
             </Box>
             <Footer />
         </>

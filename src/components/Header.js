@@ -1,5 +1,5 @@
 import { Box } from '@mui/material/'
-import { NavLink, useParams, Link } from 'react-router-dom'
+import { NavLink, useParams, Link, useNavigate } from 'react-router-dom'
 
 const headerStyle = {
     display: 'flex',
@@ -17,11 +17,17 @@ const linkStyle = {
 
 export const Header = (props) => {
     const { companyId } = useParams();
+    const redirect = useNavigate();
+
+    const handleLogOut = () => {
+        sessionStorage.removeItem('accessToken');
+        redirect('/login');
+    }
 
     return (
         <Box className='header' style={headerStyle} >
-            <NavLink className='NavLink' to={`/${companyId}`} style={({isActive}) => isActive ? {backgroundColor: 'white', color: 'black'} : null } >Bookings</NavLink>
-            <Link className='NavLink' style={{marginLeft: 'auto'}} >Log out</Link>
+            <NavLink className='NavLink' style={({isActive}) => isActive ? {backgroundColor: 'white', color: 'black'} : null } >Bookings</NavLink>
+            <div className='NavLink' style={{marginLeft: 'auto'}} onClick={handleLogOut} >Log out</div>
         </Box>
     )
 }
