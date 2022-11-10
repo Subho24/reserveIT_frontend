@@ -120,7 +120,7 @@ export const Confirmation = (props) => {
                         onChange={({target}) => setCustomerComments(target.value)}
                     />
                     <FormControl>
-                        <FormControlLabel control={<Checkbox onChange={() => toggleTimeAgreement}/>} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
+                        <FormControlLabel control={<Checkbox onChange={() => toggleTimeAgreement} required={true} />} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
                     </FormControl>
                 </div>
                 <input type='submit' className='Next' value={'Book'} onClick={submitData}/>

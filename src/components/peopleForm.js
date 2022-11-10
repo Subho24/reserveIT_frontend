@@ -12,9 +12,16 @@ export const PeopleForm = (props) => {
         if(inputValue.value === '') {
             alert('Please select the number of people')
             return
+        } else if(inputValue.value === '0') {
+            alert('The booking should be atleast for 1 person')
+            return
         }
         props.setPeopleAmount(inputValue.value)
         props.setStepCount(3);
+    }
+
+    const handleOnChange = ({target}) => {
+        props.setPeopleAmount(target.value)
     }
 
     useEffect(() => {
@@ -30,7 +37,7 @@ export const PeopleForm = (props) => {
             <h1>How many people?</h1>
             <div style={{display: 'inline-flex', fontSize: 30, margin: '0% 25% 0% 20%'}}>
                 <BsPeople style={{margin: 5}}/>
-                <input type={'number'} style={{fontSize: 25, width: 150}} min={0} max={maxPeople} id='peopleAmount' value={props.peopleAmount === 0 ? null : props.peopleAmount} />
+                <input type={'number'} style={{fontSize: 25, width: 150}} min={0} max={maxPeople} id='peopleAmount' value={props.peopleAmount} onChange={handleOnChange} required />
             </div>
             <br/>
             <input type='submit' className='Next' value={'Next'} onClick={handleOnClick} />

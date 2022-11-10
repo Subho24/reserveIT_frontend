@@ -18,7 +18,12 @@ export const TimeForm = (props) => {
     }, [])
 
     const handleOnClick = () => {
-        inputValue === null ? props.setSelectedTime(null) : props.setSelectedTime(inputValue);
+        if(inputValue === null) {
+            alert('Please select a time')
+            return
+        } else {
+            props.setSelectedTime(inputValue);
+        }
         props.setStepCount(5);
     }
 
