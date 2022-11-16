@@ -28,12 +28,11 @@ export const Login = (props) => {
 
     return (
         <div style={{
-            background: 'rgb(238,174,202)',
             background: 'linear-gradient(90deg, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%)',
             minWidth: '100vw',
             minHeight: '100vh'}} 
         >
-            <div className="confirmModal" style={{
+            <div style={{
                 display: 'flex',
                 flexDirection: 'column',
                 position: 'absolute',

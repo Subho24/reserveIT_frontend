@@ -64,14 +64,6 @@ export const TimeForm = (props) => {
 
     const time = getAvailableTimes(startTime, endTime);
 
-    useEffect(() => {
-       const timeOutId = setTimeout(() => {
-            setStartTime(startTime);
-        }, 2000)
-
-        return () => clearTimeout(timeOutId);
-    })
-
     return (
         <div className='formContainer' >
             <h1>Which time?</h1>
