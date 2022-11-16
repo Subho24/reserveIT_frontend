@@ -1,140 +1,430 @@
-#root {
-  min-height: 100vh;
-  min-width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-}
-
-.type {
-  margin: 20px auto auto auto;
-  text-align: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 15px;
-  font-size: 0.8em;
-  width: 30%;
-}
-
-.Next {
-  margin: 80px auto auto auto;
-  text-align: center;
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 15px;
-  font-size: 20px;
-  font-weight: bold;
-  min-width: 150px;
-  background-color: whitesmoke;
-}
-
-.Next:hover {
-  background-color: black;
-  color: white;
-  font-weight: bold;
-  box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
-}
-
-.type:hover {
-  box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
-}
-
-.detailsContainer {
-  display: grid;
-  grid-template-areas: 
-  'type people'
-  'date time';
-  font-size: 0.8em;
-  padding: 100px 100px 50px 100px;
-  gap: 10px;
-}
-
-.confirmType {
-  grid-area: type;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-}
-.confirmPeople {
-  grid-area: people;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-}
-.confirmDate {
-  grid-area: date;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-}
-.confirmTime {
-  grid-area: time;
-  border: 2px solid grey;
-  border-radius: 5px;
-  padding: 10px;
-}
-
-.customerDetails {
-  display: grid;
-  grid-template-areas: 
-  'firstName lastName'
-  'email email'
-  'phone phone';
-}
-
+/* For screens < 1200px */
 @media screen and (max-width: 1200px) {
   .restaurantImage {
     display: none;
   }
 }
 
-@media screen and (max-width: 1000px) {
-  .bookingForm {
-    display: flex;
+/* For screens < 500px */
+
+@media screen and (max-width: 500px) {
+  
+  .floatingTabs {
+    background-color: lightgreen;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    margin:5px
   }
-  .NavBar a {
-    display: block;
-    margin-top: 10px;
+
+  .imageForMobile {
+    margin-top: 20%;
+    width: 320px;
+    height: 250px;
+    box-shadow: inset;
+  }
+
+  .bookingHeader {
+    display: none;
+  }
+
+  .steps {
+    margin: 5px;
+    font-size: 0.9em;
+    font-style: none;
+    text-decoration: none;
+    color: grey;
   }
   
   .typeContainer {
-    margin-top: 10%;
+    margin-top: 2%;
   }
   .type {
+    width: 50%;
+    margin: 10% auto auto auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 0.8em;
+    font-weight: 900;
+  }
+
+  .formContainer h1 {
+    font-size: 1.5em;
+  }
+
+  .formContainer .people {
+    margin-top: 5%;
+    font-size: 10px;
+    color: gray;
+  }
+  
+  /* For all forms */
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 0.8em;
+    margin: 50px 0 50px 0;
+  }
+
+  /* For the date from */
+  .formContainer #date {
+    width: 150px;
+    height: 30px;
+    margin: 15px auto 0 auto;
+    font-size: 15px;
+  }
+
+  /* For time form */
+  .formContainer .input {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: center;
+  }
+  
+  .Next {
+    margin: 50px auto auto auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 80px;
+    background-color: black;
+    color: white;
+  }
+  
+  .Next:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+  
+  .type:hover {
+    box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+  
+  .detailsContainer {
+    display: grid;
+    grid-template-areas: 
+    'type people'
+    'date time';
+    font-size: 0.8em;
+    padding: 10% 10% 5% 10%;
+    gap: 10px;
+  }
+  
+  .confirmType {
+    grid-area: type;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmPeople {
+    grid-area: people;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmDate {
+    grid-area: date;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmTime {
+    grid-area: time;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .customerDetails {
+    display: grid;
+    grid-template-areas: 
+    'firstName lastName'
+    'email email'
+    'phone phone';
+  }
+  
+  .NavBar {
+    display: 'inline-block';
+    text-align: 'center';
+    margin-top: 10%;
+    font-size: 0.8em;
+  }
+  
+  /* .steps {
+    margin: 15px;
+    font-size: 1.2em;
+    font-style: none;
+    text-decoration: none;
+    color: grey;
+  } */
+  
+  .footer {
+    background-color: black;
+    color: white;
+    position: relative;
+    bottom: -10%;
+    width: 100%;
+    height: 40px;
+  }
+
+  .footer p {
+    font-size: 10px;
+  }
+  
+  .NavLink {
+    text-decoration: none;
+    color: white;
+    padding-top: 10px;
+  }
+  
+  .NavLink:hover {
+    background-color: white;
+    color: black;
+  }
+  .NavLink:active {
+    background-color: white;
+    color: black;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  .confirmModal {
+    display: flex;
+    position: absolute;
     width: 80%;
+    top: 25%;
+    left: 10%;
+    text-align: center;
+    background-color: whitesmoke;
+    flex-direction: column;
+    border-radius: 30px;
+  }
+
+}
+
+
+/* For screens > than 500px */
+
+@media screen and (min-width: 500px) {
+  
+  .floatingTabs {
+    background-color: lightgreen;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    margin:5px
+  }
+
+  .imageForMobile {
+    display: none;
+  }
+
+  .bookingHeader {
+    text-align: center; 
+    display: inline-block; 
+    width:100%; 
+    border: 2px solid grey; 
+    border-style: none none solid none;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .typeContainer {
     margin-top: 10%;
   }
-}
+  
+  .type {
+    margin: 20px auto auto auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 0.8em;
+    width: 30%;
+  }
 
-.NavBar {
-  display: 'inline-block';
-  text-align: 'center';
-  margin-top: 10%;
-  font-size: 0.8em;
-}
+  /* For all forms */
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 0.8em;
+    margin: 50px 0 50px 0;
+  }
 
-.footer {
-  position: relative;
-  bottom: -10%;
-  width: 100%;
-}
+  /* For people form */
+  .formContainer .people {
+    margin-top: 100px;
+    font-size: 10px;
+    color: gray;
+  }
 
-.NavLink {
-  text-decoration: none;
-  color: white;
-  padding-top: 10px;
-}
+  /* For the date from */
+  .formContainer #date {
+    width: 150px;
+    height: 30px;
+    margin: 15px auto 0 auto;
+    font-size: 15px;
+  }
 
-.NavLink:hover {
-  background-color: white;
-  color: black;
-}
-.NavLink:active {
-  background-color: white;
-  color: black;
-}
+  /* For time form */
+  .formContainer .input {
+    margin: 20px auto 0 auto;
+  }
+  
+  .Next {
+    margin: 50px auto auto auto;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    min-width: 80px;
+    background-color: black;
+    color: white;
+  }
+  
+  .Next:hover {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+  
+  .type:hover {
+    box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+  
+  .detailsContainer {
+    display: grid;
+    grid-template-areas: 
+    'type people'
+    'date time';
+    font-size: 0.8em;
+    padding: 100px 100px 50px 100px;
+    gap: 10px;
+  }
+  
+  .confirmType {
+    grid-area: type;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmPeople {
+    grid-area: people;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmDate {
+    grid-area: date;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .confirmTime {
+    grid-area: time;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .customerDetails {
+    display: grid;
+    grid-template-areas: 
+    'firstName lastName'
+    'email email'
+    'phone phone';
+  }
+  
+  .NavBar {
+    display: 'inline-block';
+    text-align: 'center';
+    margin-top: 10%;
+    font-size: 0.8em;
+  }
+  
+  .steps {
+    margin: 15px;
+    font-size: 1.2em;
+    font-style: none;
+    text-decoration: none;
+    color: grey;
+  }
+  
+  .footer {
+    background-color: black;
+    color: white;
+    position: relative;
+    bottom: -10%;
+    width: 100%;
+    height: 80px;
+    text-align: center;
+  }
 
-table, th, td {
-  border: 1px solid black;
+  .footer p {
+    font-size: 15px;
+  }
+  
+  .NavLink {
+    text-decoration: none;
+    color: white;
+    padding-top: 10px;
+  }
+  
+  .NavLink:hover {
+    background-color: white;
+    color: black;
+  }
+  .NavLink:active {
+    background-color: white;
+    color: black;
+  }
+  
+  table, th, td {
+    border: 1px solid black;
+  }
+
+  .confirmModal {
+    display: flex;
+    position: absolute;
+    width: 80%;
+    top: 25%;
+    left: 10%;
+    text-align: center;
+    background-color: whitesmoke;
+    flex-direction: column;
+    border-radius: 30px;
+  }
+
 }

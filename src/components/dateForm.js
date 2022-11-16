@@ -11,16 +11,20 @@ export const DateForm = (props) => {
         props.setStepCount(4);
     }
 
+    const handleChange = (target) => {
+        props.setSelectedDate(target.value)
+    }
+
     const date = new Date()
     const today = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
 
     return (
-        <div style={{textAlign: 'center', fontSize: 30, fontWeight: 'bold', marginTop: 100}}>
-            <label for='date'>
+        <div className='formContainer' style={{fontWeight: 'bold'}}>
+            <label>
                     When would you like to visit us?
             </label>
             <br />
-            <input type={'date'} id='date' style={{width: 200, height: 50, marginTop: 20, fontSize: 20}} min={today} value={props.selectedDate} />
+            <input type={'date'} id='date' min={today} value={props.selectedDate} onChange={(e) => handleChange(e.target)} />
             <br />
             <input type={'submit'} value={'Next'} className='Next' onClick={handleOnClick} />
         </div>

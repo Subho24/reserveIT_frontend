@@ -1,13 +1,49 @@
-import Select from 'react-select';
-import { BsClock } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios'
+import axios from '../axios'
+
+const getAvailableTimes = (startTime, endTime) => {
+    const date = new Date();
+    const formatedDate = `${date.getFullYear}-${date.getMonth() + 1}-${date.getDate()}`;
+
+    let startHour = new Date(`${formatedDate}, ${startTime}`).getHours();
+
+    const endHour = new Date(`${formatedDate}, ${endTime}`).getHours();
+
+    const totalHours = endHour - startHour;
+
+    const arr = [];
+
+    for(let i = 0; i < totalHours; i++) {
+      if(startTime.includes("30")) { //If start time is something like 11:30, 12:30, 13:30 ....... 
+        arr.push(`${startHour}:30`)
+        startHour++
+
+        arr.push(`${startHour}:00`)
+        arr.push(`${startHour}:30`)
+        startHour++
+
+        arr.push(`${startHour}:00`)
+        if(startHour === endHour ) break;
+      } else {
+
+        arr.push(`${startHour}:00`)
+        arr.push(`${startHour}:30`)
+        startHour++
+
+        if(startHour === endHour) {
+            arr.push(`${startHour}:00`)
+            break;
+        };
+      }
+    }
+    return arr;
+}
 
 export const TimeForm = (props) => {
     const { companyId } = useParams()
-    const [availableTimes, setAvailableTimes] = useState([]);
-    let inputValue = null;
+    const [availableTimes, setAvailableTimes] = useState();
+    const [timesArr, setTimesArr] = useState([]);
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/booking_instructions/${companyId}/`).then(response => {
@@ -17,21 +53,26 @@ export const TimeForm = (props) => {
         })
     }, [])
 
-    const handleOnClick = () => {
-        if(inputValue === null) {
-            alert('Please select a time')
-            return
-        } else {
-            props.setSelectedTime(inputValue);
-        }
+    useEffect(() => {
+        setTimesArr(availableTimes)
+    }, [availableTimes]);
+
+    const handleOnClick = (e) => {
+        props.setSelectedTime(e.target.innerText);
         props.setStepCount(5);
     }
 
+    // const time = availableTimes.map(time => {
+    //     return (
+    //         <span className='floatingTabs' onClick={handleOnClick} >{time}</span>
+    //     )
+    // })
+
     return (
-        <div style={{marginTop: 100}} >
+        <div className='formContainer' >
             <h1>Which time?</h1>
-            <div style={{display: 'flex',width: 150, margin: 'auto', marginTop: 50}}>
-                <BsClock style={{fontSize: 30, marginRight: 5}}/>
+            <div className='input'>
+                {/* <BsClock className='clockIcon'/>
                 < Select 
                     backspaceRemovesValue = {true}
                     isClearable={false}
@@ -39,39 +80,16 @@ export const TimeForm = (props) => {
                     options={availableTimes}
                     isDisabled={false}
                     onChange={(e) => inputValue = e.value}
-                />
+                /> */}
+                {                     
+                    timesArr.map(time => {
+                        return (
+                            <span className='floatingTabs' onClick={handleOnClick} >{time}</span>
+                        )
+                    })
+                }
             </div>
-            <input type={'submit'} value={'Next'} className='Next' onClick={handleOnClick} />
         </div>
     )
-}
-
-const getAvailableTimes = (startTime, endTime) => {
-    const date = new Date();
-    const formatedDate = `${date.getFullYear}-${date.getMonth() + 1}-${date.getDate()}`;
-    let startHour = new Date(`${formatedDate}, ${startTime}`).getHours();
-    const endHour = new Date(`${formatedDate}, ${endTime}`).getHours();
-    const totalHours = endHour - startHour;
-    const arr = [];
-    for(let i = 0; i < totalHours; i++) {
-      if(startTime.includes("30")) {
-        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
-        startHour++
-        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
-        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
-        startHour++
-        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
-        if(startHour === endHour ) break;
-      } else {
-        arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
-        arr.push({value: `${startHour}:30`, label: `${startHour}:30`})
-        startHour++
-        if(startHour === endHour) {
-            arr.push({value: `${startHour}:00`, label: `${startHour}:00`})
-            break;
-        };
-      }
-    }
-    return arr;
 }
 

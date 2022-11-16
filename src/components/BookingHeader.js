@@ -20,7 +20,7 @@ const imgStyle = {
 export const BookingHeader = (props) => {
 
     return (
-        <div style={wrapperStyle}>
+        <div className='bookingHeader'>
             <h1 style={{display: 'inline-block'}}>
                 {props.companyInfo.company_name}
             </h1>

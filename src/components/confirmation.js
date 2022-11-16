@@ -17,6 +17,16 @@ export const Confirmation = (props) => {
     const [customerComments, setCustomerComments] = useState(null);
     const [timeLenthAgreed, setTimeLengthAgreed] = useState(false);
 
+    const validateCustomerInfo = () => {  
+        console.log(customerName, customerPhone, customerEmail, timeLenthAgreed)       
+        if(!customerName || !customerPhone || !customerEmail || !timeLenthAgreed) {
+            alert('Please fill in the fileds marked with *')
+            return
+        } else {
+            submitData();
+        }
+    }
+
     const toggleTimeAgreement = () => {
         !timeLenthAgreed ? setTimeLengthAgreed(true) : setTimeLengthAgreed(false);
     }
@@ -50,17 +60,7 @@ export const Confirmation = (props) => {
 
     const modalContent = bookingStatus === 'success' ?
     (
-        <div className="confirmModal" style={{
-            display: 'flex',
-            position: 'absolute',
-            width: 400,
-            top: '40%',
-            left: '35%',
-            textAlign: 'center',
-            backgroundColor: 'whitesmoke',
-            flexDirection: 'column',
-            borderRadius: 30
-        }}>
+        <div className="confirmModal">
             <h1>Booking confirmed</h1>
             <BsCheckCircle style={{
                 fontSize: 50,
@@ -70,17 +70,7 @@ export const Confirmation = (props) => {
             <button className="Next" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Okay</button>
         </div>
     ) : (
-        <div className="confirmModal" style={{
-            display: 'flex',
-            position: 'absolute',
-            width: 400,
-            top: '25%',
-            left: '35%',
-            textAlign: 'center',
-            backgroundColor: 'whitesmoke',
-            flexDirection: 'column',
-            borderRadius: 30
-        }}>
+        <div className="confirmModal">
             <h1>Error!!</h1>
             <h3>Something went wrong!!</h3>
             <h3>Please try again later</h3>
@@ -101,17 +91,23 @@ export const Confirmation = (props) => {
                 <p className="confirmDate" >Date: {props.selectedDate} </p>
                 <p className="confirmTime" >Time: {props.selectedTime} </p>
             </div>
-            <Box sx={{p: '0px 100px 100px 100px'}}  >
+            <Box sx={{p: '0px 5% 5% 5%'}}  >
                 <div style={{display: "flex", flexWrap: 'wrap'}}>     
                     <TextField id="filled-basic" type={"text"} label="Full Name" variant="filled" 
+                        required={true}
+                        error={customerName === null ? true : false}
                         sx={{ m: 1, flexGrow: 1}}
                         onChange={({target}) => setCustomerName(target.value) }
                     />
                     <TextField id="filled-basic" type={"tel"} label="Mobile" variant="filled"
+                        required={true}
+                        error={customerPhone === null ? true : false}
                         sx={{m: 1, flexGrow: 1}}
                         onChange={({target}) => setCustomerPhone(target.value)}
                     />
                     <TextField id="filled-basic" type={"email"} label="Email" variant="filled" 
+                        required={true}
+                        error={customerEmail === null ? true : false}
                         sx={{ m: 1, width: 1}}
                         onChange={({target}) => setCustomerEmail(target.value)}
                     />
@@ -120,10 +116,10 @@ export const Confirmation = (props) => {
                         onChange={({target}) => setCustomerComments(target.value)}
                     />
                     <FormControl>
-                        <FormControlLabel control={<Checkbox onChange={() => toggleTimeAgreement} required={true} />} label="I understand that the booking is for 1 hour" sx={{m: 1}} />
+                        <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="I understand that the booking is for 1 hour *" sx={{m: 1}}  />
                     </FormControl>
                 </div>
-                <input type='submit' className='Next' value={'Book'} onClick={submitData}/>
+                <input type='submit' className='Next' value={'Book'} onClick={validateCustomerInfo}/>
                 <Modal open={modalOpen} >
                     {modalContent}
                 </Modal>

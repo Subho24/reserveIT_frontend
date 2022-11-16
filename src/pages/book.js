@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BookingHeader } from '../components/BookingHeader';
+import RamenShackLogo from '../RamenShackLogo.png';
 import { Image } from '../components/Image';
 import { NavBar } from '../components/NavBar';
 import { TypeForm } from '../components/typeForm';
@@ -16,7 +17,7 @@ export function Book(props) {
   const [availableTypes, setAvailableTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('');
   const [peopleAmount, setPeopleAmount] = useState(0);
-  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState(null)
 
   if(props.companyInfo === null) {
@@ -26,6 +27,7 @@ export function Book(props) {
         <>
         <div>
         <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
+        <img src={RamenShackLogo} alt='Company logo' className='imageForMobile' />
         <main style={{display: 'flex', width: '100%', height: '100%'}}>
             <Image />
           <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
@@ -35,12 +37,13 @@ export function Book(props) {
               selectedDate={selectedDate}
               selectedTime={selectedTime}
               setStepCount={setStepCount}
+              stepCount={stepCount}
             />
             {
-              stepCount === 1 ? <TypeForm setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
-              stepCount === 2 ? <PeopleForm companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
-              stepCount === 3 ? <DateForm companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-              stepCount === 4 ? <TimeForm companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
+              stepCount === 1 ? <TypeForm bold={true} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
+              stepCount === 2 ? <PeopleForm bold={true} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
+              stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
+              stepCount === 4 ? <TimeForm bold={true} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
               <Confirmation 
                 selectedType={selectedType}   
                 selectedTime={selectedTime} 
