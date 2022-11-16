@@ -2,7 +2,7 @@ import { Box } from "@mui/system"
 import { TextField } from "@mui/material"
 import { Checkbox, FormControl, FormControlLabel, Modal } from "@mui/material"
 import { useState } from "react"
-import axios from "axios"
+import axios from "../axios"
 import { useParams } from "react-router-dom"
 import { BsCheckCircle } from 'react-icons/bs'
 import { BiError } from 'react-icons/bi'
@@ -32,7 +32,7 @@ export const Confirmation = (props) => {
     }
 
     const submitData = () => {
-        axios.post('http://localhost:4000/api/bookings', {
+        axios.post('/api/bookings', {
             "company_id": companyId,
             "booking_type": props.selectedType,
             "booking_date": props.selectedDate,
