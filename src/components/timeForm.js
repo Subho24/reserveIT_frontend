@@ -43,30 +43,34 @@ const getAvailableTimes = (startTime, endTime) => {
 export const TimeForm = (props) => {
     const { companyId } = useParams()
     const [availableTimes, setAvailableTimes] = useState();
-    const [timesArr, setTimesArr] = useState([]);
+    const [startTime, setStartTime] = useState();
+    const [endTime, setEndTime] = useState();
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/booking_instructions/${companyId}/`).then(response => {
+        axios.get(`/api/booking_instructions/${companyId}`).then(response => {
             response.data.map(item => {
-                if(item.booking_type === props.selectedType) { setAvailableTimes(getAvailableTimes(item.booking_type_start, item.booking_type_end )) }
+                if(item.booking_type === props.selectedType) {
+                    setStartTime(item.booking_type_start)
+                    setEndTime(item.booking_type_end)
+                }
             })
         })
     }, [])
-
-    useEffect(() => {
-        setTimesArr(availableTimes)
-    }, [availableTimes]);
 
     const handleOnClick = (e) => {
         props.setSelectedTime(e.target.innerText);
         props.setStepCount(5);
     }
 
-    // const time = availableTimes.map(time => {
-    //     return (
-    //         <span className='floatingTabs' onClick={handleOnClick} >{time}</span>
-    //     )
-    // })
+    const time = getAvailableTimes(startTime, endTime);
+
+    useEffect(() => {
+       const timeOutId = setTimeout(() => {
+            setStartTime(startTime);
+        }, 2000)
+
+        return () => clearTimeout(timeOutId);
+    })
 
     return (
         <div className='formContainer' >
@@ -81,12 +85,9 @@ export const TimeForm = (props) => {
                     isDisabled={false}
                     onChange={(e) => inputValue = e.value}
                 /> */}
+                {console.log(time)}
                 {                     
-                    timesArr.map(time => {
-                        return (
-                            <span className='floatingTabs' onClick={handleOnClick} >{time}</span>
-                        )
-                    })
+                    time.map(time => <span className='floatingTabs' onClick={handleOnClick} >{time}</span>)
                 }
             </div>
         </div>
