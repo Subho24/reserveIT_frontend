@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BookingHeader } from '../components/BookingHeader';
 import RamenShackLogo from '../RamenShackLogo.png';
 import { Image } from '../components/Image';
@@ -12,16 +12,79 @@ import { BookingFooter } from '../components/BookingFooter'
 import { Loading } from '../components/Loading';
 
 
+const createArray = (length) => {
+  const arr = [];
+  for(let i = 0; i < length; i++) {
+      arr.push(i+1);
+  }
+  return arr;
+}
+
+const getAvailableTimes = (startTime, endTime) => {
+  console.log(startTime, endTime)
+  const date = new Date();
+  const formatedDate = `${date.getFullYear}-${date.getMonth() + 1}-${date.getDate()}`;
+
+  let startHour = new Date(`${formatedDate}, ${startTime}`).getHours();
+
+  const endHour = new Date(`${formatedDate}, ${endTime}`).getHours();
+
+  const totalHours = endHour - startHour;
+
+  const arr = [];
+
+  for(let i = 0; i < totalHours; i++) {
+    if(startTime.includes("30")) { //If start time is something like 11:30, 12:30, 13:30 ....... 
+      arr.push(`${startHour}:30`)
+      startHour++
+
+      arr.push(`${startHour}:00`)
+      arr.push(`${startHour}:30`)
+      startHour++
+
+      arr.push(`${startHour}:00`)
+      if(startHour === endHour ) break;
+    } else {
+
+      arr.push(`${startHour}:00`)
+      arr.push(`${startHour}:30`)
+      startHour++
+
+      if(startHour === endHour) {
+          arr.push(`${startHour}:00`)
+          break;
+      };
+    }
+  }
+  return arr;
+}
+
 export function Book(props) {
   const [stepCount, setStepCount] = useState(1)
+  const [bookingInfo, setBookingInfo] = useState();
+  const [timeArr, setTimeArr] = useState();
+  const [peopleArr, setPeopleArr] = useState()
   const [availableTypes, setAvailableTypes] = useState([]);
   const [selectedType, setSelectedType] = useState('');
   const [peopleAmount, setPeopleAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState(null)
 
+
+  useEffect(() => {
+    if(selectedType !== '') {
+      bookingInfo.map(info => {
+        if(info.booking_type === selectedType) {
+          setPeopleArr(createArray(info.max_people))
+          setTimeArr(getAvailableTimes(info.booking_type_start, info.booking_type_end))
+        }
+      })
+    }
+  }, [selectedType])
+
+
   if(props.companyInfo === null) {
-   return <Loading setCompanyInfo={props.setCompanyInfo} /> 
+   return <Loading setBookingInfo={setBookingInfo} setCompanyInfo={props.setCompanyInfo} setAvailableTypes={setAvailableTypes} /> 
   } else {
     return(
         <>
@@ -40,10 +103,10 @@ export function Book(props) {
               stepCount={stepCount}
             />
             {
-              stepCount === 1 ? <TypeForm bold={true} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
-              stepCount === 2 ? <PeopleForm bold={true} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
+              stepCount === 1 ? <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
+              stepCount === 2 ? <PeopleForm bold={true} peopleArr={peopleArr} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
               stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-              stepCount === 4 ? <TimeForm bold={true} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
+              stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
               <Confirmation 
                 selectedType={selectedType}   
                 selectedTime={selectedTime} 

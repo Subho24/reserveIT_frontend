@@ -45,17 +45,18 @@ export const TimeForm = (props) => {
     const [availableTimes, setAvailableTimes] = useState();
     const [startTime, setStartTime] = useState();
     const [endTime, setEndTime] = useState();
+    console.log(props.timeArr);
 
-    useEffect(() => {
-        axios.get(`/api/booking_instructions/${companyId}`).then(response => {
-            response.data.map(item => {
-                if(item.booking_type === props.selectedType) {
-                    setStartTime(item.booking_type_start)
-                    setEndTime(item.booking_type_end)
-                }
-            })
-        })
-    }, [])
+    // useEffect(() => {
+    //     axios.get(`/api/booking_instructions/${companyId}`).then(response => {
+    //         response.data.map(item => {
+    //             if(item.booking_type === props.selectedType) {
+    //                 setStartTime(item.booking_type_start)
+    //                 setEndTime(item.booking_type_end)
+    //             }
+    //         })
+    //     })
+    // }, [])
 
     const handleOnClick = (e) => {
         props.setSelectedTime(e.target.innerText);
@@ -79,7 +80,7 @@ export const TimeForm = (props) => {
                 /> */}
                 {console.log(time)}
                 {                     
-                    time.map(time => <span className='floatingTabs' onClick={handleOnClick} >{time}</span>)
+                    props.timeArr ? props.timeArr.map(time => <span className='floatingTabs' onClick={handleOnClick} >{time}</span>) : null
                 }
             </div>
         </div>

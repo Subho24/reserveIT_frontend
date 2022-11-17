@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 export const TypeForm = (props) => {
     const { companyId } = useParams()
 
+    console.log(props.companyInfo)
+
     const handleOnClick = ({target}) => {
         props.setSelectedType(target.innerText)
         props.setStepCount(2);

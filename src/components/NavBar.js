@@ -31,7 +31,7 @@ export const NavBar = (props) => {
             }} >
                 <BsCalendarWeek/>{props.selectedDate === '' ? 'Date' : props.selectedDate}
             </Link>
-            <Link style={{pointerEvents: props.selectedDate === null ? 'none' : '', fontWeight: props.stepCount === 4 ? 'bold' : null,  border: props.stepCount === 4 ? 'solid 1px black': null, padding: props.stepCount === 4 ? 6 : null, borderRadius: props.stepCount === 4 ? 10 : null, color: props.stepCount === 4 ? 'black' : null }}  
+            <Link style={{pointerEvents: props.selectedDate === '' ? 'none' : '', fontWeight: props.stepCount === 4 ? 'bold' : null,  border: props.stepCount === 4 ? 'solid 1px black': null, padding: props.stepCount === 4 ? 6 : null, borderRadius: props.stepCount === 4 ? 10 : null, color: props.stepCount === 4 ? 'black' : null }}  
                 className='steps'
                 onClick={(e) => {
                 if(props.selectedDate === null) e.preventDefault()

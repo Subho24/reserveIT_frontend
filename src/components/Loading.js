@@ -6,17 +6,14 @@ import { useEffect } from 'react';
 export const Loading = (props) => {
     const { companyId } = useParams();
 
-    var config = {
-        method: 'get',
-        url: 'http://localhost:4000/api/companies/2',
-        headers: { 
-          'Content-Type': 'application/json'
-        }
-    };
-
     useEffect(() => {
-        axios.get('/api/companies/2').then(response => {
-            props.setCompanyInfo(response.data[0]);
+        axios.get(`/api/companies/companyBookingInfo/${companyId}`).then(response => {
+            const availableTypes = response.data.bookingInfo.map(info => {
+                return info.booking_type
+            })
+            props.setCompanyInfo(response.data.companyInfo)
+            props.setBookingInfo(response.data.bookingInfo)
+            props.setAvailableTypes(availableTypes);
         })
     }, [])
 
