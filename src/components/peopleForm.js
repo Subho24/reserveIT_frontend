@@ -1,16 +1,3 @@
-import { useState, useEffect } from 'react';
-import { BsPeople } from 'react-icons/bs';
-import { useParams } from 'react-router-dom';
-import axios from '../axios';
-
-const createArray = (length) => {
-    const arr = [];
-    for(let i = 0; i < length; i++) {
-        arr.push(i+1);
-    }
-    return arr;
-}
-
 export const PeopleForm = (props) => {
     
     const handleOnClick = (e) => {

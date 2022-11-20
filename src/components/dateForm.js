@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 export const DateForm = (props) => {
     const handleOnClick = () => {
         const inputValue = document.getElementById('date').value;

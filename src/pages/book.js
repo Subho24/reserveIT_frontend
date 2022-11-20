@@ -21,17 +21,13 @@ const createArray = (length) => {
 }
 
 const getAvailableTimes = (startTime, endTime) => {
-  console.log(startTime, endTime)
-  const date = new Date();
-  const formatedDate = `${date.getFullYear}-${date.getMonth() + 1}-${date.getDate()}`;
+  let startHour = startTime.split(':')[0];
 
-  let startHour = new Date(`${formatedDate}, ${startTime}`).getHours();
-
-  const endHour = new Date(`${formatedDate}, ${endTime}`).getHours();
+  const endHour = endTime.split(':')[0];
 
   const totalHours = endHour - startHour;
 
-  const arr = [];
+  let arr = [];
 
   for(let i = 0; i < totalHours; i++) {
     if(startTime.includes("30")) { //If start time is something like 11:30, 12:30, 13:30 ....... 
@@ -56,7 +52,8 @@ const getAvailableTimes = (startTime, endTime) => {
       };
     }
   }
-  return arr;
+  
+  return arr
 }
 
 export function Book(props) {

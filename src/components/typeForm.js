@@ -1,11 +1,8 @@
 import axios from "../axios";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 export const TypeForm = (props) => {
-    const { companyId } = useParams()
-
-    console.log(props.companyInfo)
+    const companyId = props.companyInfo.company_id;
 
     const handleOnClick = ({target}) => {
         props.setSelectedType(target.innerText)
