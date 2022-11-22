@@ -6,6 +6,20 @@ import axios from "../axios"
 import { useParams } from "react-router-dom"
 import { BsCheckCircle } from 'react-icons/bs'
 import { BiError } from 'react-icons/bi'
+import validator from "validator"
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+
+const inputStyle = {
+    width: '100%',
+    height: '55px',
+    backgroundColor: '#f0f0f0',
+    border: 'none'
+}
+
+const buttonStyle = {
+    padding: 0
+}
 
 export const Confirmation = (props) => {
     const { companyId } = useParams();
@@ -16,14 +30,24 @@ export const Confirmation = (props) => {
     const [customerEmail, setCustomerEmail] = useState(null);
     const [customerComments, setCustomerComments] = useState(null);
     const [timeLenthAgreed, setTimeLengthAgreed] = useState(false);
+    const [countryCode, setCountryCode] = useState();
 
     const validateCustomerInfo = () => {  
-        console.log(customerName, customerPhone, customerEmail, timeLenthAgreed)       
+        console.log(customerName, customerPhone, customerEmail, timeLenthAgreed, countryCode)       
         if(!customerName || !customerPhone || !customerEmail || !timeLenthAgreed) {
             alert('Please fill in the fileds marked with *')
             return
         } else {
-            submitData();
+            if(!validator.isMobilePhone(customerPhone, countryCode)) {
+                alert('Please provide a valid phone number')
+                return
+            }
+            if(!validator.isEmail(customerEmail)) {
+                alert('Invalid email')
+                return
+            }
+            console.log('Done!!!!!')
+            // submitData();
         }
     }
 
@@ -56,6 +80,19 @@ export const Confirmation = (props) => {
         setModalOpen(false)
         props.setStepCount(1)
         window.location.reload();
+    }
+
+    const handleCountryCode = (country) => {
+        switch(country) {
+            case 'se':
+                setCountryCode(['sv-SE']);
+                break;
+            case 'dk':
+                setCountryCode(['da-DK']);
+                break;
+            case 'pl':
+                setCountryCode(['pl-PL']);
+        }
     }
 
     const modalContent = bookingStatus === 'success' ?
@@ -99,11 +136,21 @@ export const Confirmation = (props) => {
                         sx={{ m: 1, flexGrow: 1}}
                         onChange={({target}) => setCustomerName(target.value) }
                     />
-                    <TextField id="filled-basic" type={"tel"} label="Mobile" variant="filled"
+                    {/* <TextField id="filled-basic" type={"tel"} label="Mobile" variant="filled"
                         required={true}
                         error={customerPhone === null ? true : false}
                         sx={{m: 1, flexGrow: 1}}
                         onChange={({target}) => setCustomerPhone(target.value)}
+                    /> */}
+                    <PhoneInput
+                        country={'se'}
+                        containerClass="phoneContainer"
+                        inputClass="phoneInput"
+                        inputStyle={inputStyle}
+                        onChange={(phone, country) => {
+                            setCustomerPhone(phone)
+                            handleCountryCode(country.countryCode)
+                        }}
                     />
                     <TextField id="filled-basic" type={"email"} label="Email" variant="filled" 
                         required={true}

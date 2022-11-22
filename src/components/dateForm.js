@@ -18,7 +18,7 @@ export const DateForm = (props) => {
 
     return (
         <div className='formContainer' style={{fontWeight: 'bold'}}>
-            <label>
+            <label className="TimeLabel">
                     When would you like to visit us?
             </label>
             <br />
