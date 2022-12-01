@@ -13,7 +13,6 @@ export const Home = (props) => {
             <Header />
             <Box style={{minHeight: '100vh', margin: '0px 20px 0 20px'}} >
                 <BookingList token={props.token} userId={props.userId} />
-                <button onClick={() => redirect('/book/2')} >Visit site</button>
             </Box>
             <Footer />
         </>

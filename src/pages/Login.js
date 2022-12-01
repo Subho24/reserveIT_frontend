@@ -15,7 +15,6 @@ export const Login = (props) => {
         })
         .then(res => {
             const token = res.data.token;
-            console.log(token);
             sessionStorage.setItem('accessToken', token)
 
             const decoded = jwtDecode(token);

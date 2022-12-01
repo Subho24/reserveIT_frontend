@@ -46,8 +46,7 @@ export const Confirmation = (props) => {
                 alert('Invalid email')
                 return
             }
-            console.log('Done!!!!!')
-            // submitData();
+            submitData();
         }
     }
 
