@@ -1,5 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://reserveit-app.herokuapp.com/"
+    // baseURL: "http://localhost:4000/"
+    // baseURL: "http://192.168.0.39:4000/"
+    baseURL: "https://reserveit.onrender.com/"
 })

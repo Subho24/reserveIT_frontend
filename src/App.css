@@ -190,9 +190,12 @@
     text-decoration: none;
     color: white;
     padding-top: 10px;
+    border-radius: 5px;
+    height: 60%;
+    margin: 10px 5px 0px 5px;
   }
   
-  .NavLink:hover {
+  .NavLink :hover {
     background-color: white;
     color: black;
   }
@@ -206,16 +209,17 @@
   }
 
   .confirmModal {
-    padding: 5%;
+    /* padding: 5%; */
     display: flex;
     position: absolute;
-    width: 80%;
+    /* width: 80%; */
     top: 25%;
-    left: 10%;
+    /* left: 10%; */
     text-align: center;
     background-color: whitesmoke;
     flex-direction: column;
     border-radius: 30px;
+    margin: 2%;
   }
 
   .phoneContainer {
@@ -230,6 +234,10 @@
     height: 100%;
     background-color: #f0f0f0;
     border: none;
+  }
+  
+  .react-calendar__tile--range {
+    box-shadow: 0 0 6px 2px black;
   }
 
 }
@@ -411,6 +419,9 @@
     text-decoration: none;
     color: white;
     padding-top: 10px;
+    border-radius: 5px;
+    height: 60%;
+    margin: 10px 5px 0px 5px;
   }
   
   .NavLink:hover {
@@ -450,6 +461,15 @@
     height: 100%;
     background-color: #f0f0f0;
     border: none;
+  }
+
+  .react-calendar button {
+    background-color: transparent;
+    border: none;
+  }
+
+  .react-calendar__tile:focus {
+    background-color: blue;
   }
 
 }

@@ -1,20 +1,12 @@
-import axios from "../axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { LoadingVisual } from "./Loading";
-import { FaRegClock } from 'react-icons/fa'
-import { MdOutlinePeopleOutline } from 'react-icons/md'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Box, Modal, Card, CardContent } from "@mui/material";
 
 
-export const BookingList = (props) => {
-    const { companyId } = useParams();
+export const RecentBookingsList = (props) => {
     const [customerInfo, setCustoemrInfo] = useState(null);
     const [modalOpen, setModalOpen] = useState(false)
-    const nav = useNavigate();
-    const currDate = new Date()
-    const selectedDate = props.selectedDate === null ? `${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}` : props.selectedDate
 
 
     const countCustomers = (bookings) => {
@@ -27,6 +19,9 @@ export const BookingList = (props) => {
         return totalCustomers;
     }
 
+    const first10Bookings = props.bookings.slice(0, 10);
+    const recentBookings = first10Bookings.reverse();
+
     const handleCustomerInfoClick = (booking) => {
         setCustoemrInfo({
             customer_name: booking.customer_name,
@@ -34,12 +29,6 @@ export const BookingList = (props) => {
             customer_email: booking.customer_email
         });
         setModalOpen(true);
-    }
-
-
-    const listStyles = {
-        display: 'flex',
-        gap: 50
     }
 
     const modalContent = (
@@ -90,7 +79,7 @@ export const BookingList = (props) => {
         marginBottom: '10px'
     }
 
-    if(props.bookings.length < 1) {
+    if(recentBookings.length < 1) {
         return(
             <p>No bookings for today!</p>
         )
@@ -98,8 +87,8 @@ export const BookingList = (props) => {
         return (
             <>
                 <Box>
-                    <div style={summaryStyle}>{props.bookings.length} {props.bookings.length > 1 ? 'bookings' : 'booking'} {countCustomers(props.bookings)} {countCustomers(props.bookings) > 1 ? 'customers' : 'customer'}</div>
-                    {props.bookings.map(booking => {
+                    <div style={summaryStyle}>{recentBookings.length} {recentBookings.length > 1 ? 'bookings' : 'booking'} {countCustomers(recentBookings)} {countCustomers(recentBookings) > 1 ? 'customers' : 'customer'}</div>
+                    {recentBookings.map(booking => {
                         return(
                             <Card sx={{marginTop: 5}} onClick={() => handleCustomerInfoClick(booking)}>
                                 <CardContent>
@@ -107,7 +96,9 @@ export const BookingList = (props) => {
                                     <span style={typeStyle}>{booking.booking_type} </span>
                                     <br/>
                                     <br/>
-                                    <span style={nameStyle}>{booking.customer_name}</span><span style={{float: 'left', paddingTop: '4px', paddingLeft: '5px', color: 'red'}}>{booking.number_of_people} person</span>
+                                    <span style={nameStyle}>{booking.customer_name}</span>
+                                    <span style={{float: 'left', paddingTop: '4px', paddingLeft: '5px', color: 'red'}}>{booking.number_of_people} person</span>
+                                    <span style={{float: 'right'}}>{booking.booking_date}</span>
                                 </CardContent>
                             </Card>
                         )

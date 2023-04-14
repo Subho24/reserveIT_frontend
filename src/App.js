@@ -2,7 +2,8 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Book } from './pages/book';
-import { Home } from './pages/Home';
+import { Recents } from './pages/recents';
+import { AllBookings } from './pages/allBookings';
 import { Login } from './pages/Login';
 
 
@@ -27,7 +28,8 @@ function App() {
       <Routes>
         <Route path='/' element={<Login setAccessToken={setAccessToken} />} />
         <Route path='/login' element={<Login setAccessToken={setAccessToken} />} />
-        <Route path='/dashboard/:companyId' element={<Home token={accessToken} /> } />
+        <Route path='/recents/:companyId' element={<Recents /> } />
+        <Route path='/bookings/:companyId' element={<AllBookings token={accessToken} /> } />
         <Route path='/book/:companyId' element={<Book companyInfo={companyInfo} setCompanyInfo={setCompanyInfo} /> } />
       </Routes>
     </Router>

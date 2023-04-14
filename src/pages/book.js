@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BookingHeader } from '../components/BookingHeader';
-import RamenShackLogo from '../RamenShackLogo.png';
+// import RamenShackLogo from '../RamenShackLogo.png';
+import logo from '../logo.jpg';
 import { Image } from '../components/Image';
 import { NavBar } from '../components/NavBar';
 import { TypeForm } from '../components/typeForm';
@@ -87,7 +88,7 @@ export function Book(props) {
         <>
         <div>
         <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
-        <img src={RamenShackLogo} alt='Company logo' className='imageForMobile' />
+        <img src={logo} alt='Company logo' className='imageForMobile' />
         <main style={{display: 'flex', width: '100%', height: '100%'}}>
             <Image />
           <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
