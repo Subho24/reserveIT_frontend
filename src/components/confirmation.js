@@ -143,10 +143,15 @@ export const Confirmation = (props) => {
                     /> */}
                     <PhoneInput
                         country={'se'}
+                        value={customerPhone}
                         containerClass="phoneContainer"
                         inputClass="phoneInput"
                         inputStyle={inputStyle}
                         onChange={(phone, country) => {
+                            if(country.countryCode === 'se') {
+                                if(phone[2] === '0') phone = '46'
+                                console.log(phone)
+                            }
                             setCustomerPhone(phone)
                             handleCountryCode(country.countryCode)
                         }}

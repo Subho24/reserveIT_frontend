@@ -11,8 +11,7 @@ export const RecentBookingsList = (props) => {
 
     const countCustomers = (bookings) => {
         let totalCustomers = 0;
-
-        for(let i=0; i<props.bookings.length; i++) {
+        for(let i=0; i<bookings.length; i++) {
             totalCustomers += bookings[i].number_of_people
         }
 
