@@ -20,7 +20,7 @@ export const Recents = (props) => {
         })
         .then((res) => {
             console.log(res.data);
-            setBookings(res.data);
+            setBookings(res.data.reverse());
         })
         .catch((err) => {
             console.log(err);

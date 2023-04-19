@@ -7,7 +7,7 @@ export const PeopleForm = (props) => {
 
     return (
         <div className='formContainer'>
-            <h1>How many people?</h1>
+            <h1>Valj antal personer</h1>
             {/* <div style={{display: 'inline-flex', fontSize: 30, margin: '0% 25% 0% 20%'}}>
                 <BsPeople style={{margin: 5}}/>
                 <input type={'number'}  min={0} max={maxPeople} id='peopleAmount' value={props.peopleAmount} onChange={handleOnChange} required />

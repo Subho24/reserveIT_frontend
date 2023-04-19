@@ -22,7 +22,8 @@ export const CalendarWrapper = (props) => {
 
     useEffect(() => {
         console.log(currDate)
-        axios.get(`/api/bookings/${companyId}/?custom=booking_date&for="${currDate.getFullYear()}-${currDate.getMonth() + 1 >= 10 ? '' : '0'}${currDate.getMonth() + 1}-${currDate.getDate() >= 10 ? '' : '0'}${currDate.getDate()}"`, {
+        // axios.get(`/api/bookings/${companyId}/?custom=booking_date&for="${currDate.getFullYear()}-${currDate.getMonth() + 1 >= 10 ? '' : '0'}${currDate.getMonth() + 1}-${currDate.getDate() >= 10 ? '' : '0'}${currDate.getDate()}"`, {
+        axios.get(`/api/bookings/${companyId}/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

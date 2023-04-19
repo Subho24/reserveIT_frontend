@@ -26,7 +26,7 @@ export const DateForm = (props) => {
     return (
         <div className='formContainer' style={{fontWeight: 'bold'}}>
             <label className="TimeLabel">
-                    When would you like to visit us?
+                Valj datum
             </label>
             <br />
             <input type={'date'} id='date' min={today} value={props.selectedDate} onChange={(e) => handleChange(e.target)} />

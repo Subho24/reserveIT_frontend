@@ -10,13 +10,6 @@ import validator from "validator"
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
-const inputStyle = {
-    width: '100%',
-    height: '55px',
-    backgroundColor: '#f0f0f0',
-    border: 'none'
-}
-
 const buttonStyle = {
     padding: 0
 }
@@ -32,18 +25,25 @@ export const Confirmation = (props) => {
     const [timeLenthAgreed, setTimeLengthAgreed] = useState(false);
     const [countryCode, setCountryCode] = useState();
 
+    let inputStyle = {
+        width: '100%',
+        height: '55px',
+        backgroundColor: '#f0f0f0',
+        borderBottom: customerPhone ? 'none' : '1px solid #d6413f'
+    }
+
     const validateCustomerInfo = () => {  
         console.log(customerName, customerPhone, customerEmail, timeLenthAgreed, countryCode)       
         if(!customerName || !customerPhone || !customerEmail || !timeLenthAgreed) {
-            alert('Please fill in the fileds marked with *')
+            alert('Vänligen fyll i fälten markerade med *')
             return
         } else {
             if(!validator.isMobilePhone(customerPhone, countryCode)) {
-                alert('Please provide a valid phone number')
+                alert('Ange ett giltigt telefonnummer')
                 return
             }
             if(!validator.isEmail(customerEmail)) {
-                alert('Invalid email')
+                alert('Ogiltig Mejl')
                 return
             }
             submitData();
@@ -122,14 +122,14 @@ export const Confirmation = (props) => {
     return (
         <div>
             <div className="detailsContainer" >
-                <p className="confirmType" >Type: {props.selectedType} </p>
-                <p className="confirmPeople" >Number of people: {props.peopleAmount} </p>
-                <p className="confirmDate" >Date: {props.selectedDate} </p>
-                <p className="confirmTime" >Time: {props.selectedTime} </p>
+                <p className="confirmType" >Typ: {props.selectedType} </p>
+                <p className="confirmPeople" >Antal personer: {props.peopleAmount} </p>
+                <p className="confirmDate" >Datum: {props.selectedDate} </p>
+                <p className="confirmTime" >Tid: {props.selectedTime} </p>
             </div>
             <Box sx={{p: '0px 5% 5% 5%'}}  >
                 <div style={{display: "flex", flexWrap: 'wrap'}}>     
-                    <TextField id="filled-basic" type={"text"} label="Full Name" variant="filled" 
+                    <TextField id="filled-basic" type={"text"} label="Namn" variant="filled" 
                         required={true}
                         error={customerName === null ? true : false}
                         sx={{ m: 1, flexGrow: 1}}
@@ -156,18 +156,18 @@ export const Confirmation = (props) => {
                             handleCountryCode(country.countryCode)
                         }}
                     />
-                    <TextField id="filled-basic" type={"email"} label="Email" variant="filled" 
+                    <TextField id="filled-basic" type={"email"} label="Mejl" variant="filled" 
                         required={true}
-                        error={customerEmail === null ? true : false}
+                        error={customerEmail === null || !validator.isEmail(customerEmail) ? true : false}
                         sx={{ m: 1, width: 1}}
                         onChange={({target}) => setCustomerEmail(target.value)}
                     />
-                    <TextField id="filled-basic" type={"text"} label="Comments" variant="filled" multiline maxRows={3} minRows={2}
+                    <TextField id="filled-basic" type={"text"} label="Meddelande" variant="filled" multiline maxRows={3} minRows={2}
                         sx={{ m: 1, width: 1}}
                         onChange={({target}) => setCustomerComments(target.value)}
                     />
                     <FormControl>
-                        <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="I understand that the booking is for 1 hour *" sx={{m: 1}}  />
+                        <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="Jag bekräftar bokningen och att informationen jag lämnat är korrekt. *" sx={{m: 1}}  />
                     </FormControl>
                 </div>
                 <input type='submit' className='Next' value={'Book'} onClick={validateCustomerInfo}/>
@@ -176,5 +176,12 @@ export const Confirmation = (props) => {
                 </Modal>
             </Box>
         </div>
+        // <div>
+        //     <BsCheckCircle style={{
+        //         fontSize: 50,
+        //         color: 'green',
+        //         margin: 'auto'
+        //     }} />
+        // </div>
     )
 }

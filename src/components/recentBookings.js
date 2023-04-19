@@ -18,8 +18,7 @@ export const RecentBookingsList = (props) => {
         return totalCustomers;
     }
 
-    const first10Bookings = props.bookings.slice(0, 10);
-    const recentBookings = first10Bookings.reverse();
+    const recentBookings = props.bookings;
 
     const handleCustomerInfoClick = (booking) => {
         setCustoemrInfo({
