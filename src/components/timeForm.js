@@ -20,7 +20,7 @@ export const TimeForm = (props) => {
     if(props.timeArr.length > 0) {
         return (
             <div className='formContainer' >
-                <h1>Which time?</h1>
+                <h1>Välj tid</h1>
                 <div className='input'>
                     {/* <BsClock className='clockIcon'/>
                     < Select 
