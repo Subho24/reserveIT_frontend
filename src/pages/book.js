@@ -11,6 +11,9 @@ import { TimeForm } from '../components/timeForm';
 import { Confirmation } from '../components/confirmation';
 import { BookingFooter } from '../components/BookingFooter'
 import { Loading } from '../components/Loading';
+import { BsCheckCircle } from 'react-icons/bs'
+import { redirect } from 'react-router-dom';
+
 
 
 const createArray = (length) => {
@@ -60,6 +63,7 @@ const getAvailableTimes = (startTime, endTime) => {
 export function Book(props) {
   const [stepCount, setStepCount] = useState(1)
   const [bookingInfo, setBookingInfo] = useState();
+  const [bookingStatus, setBookingStatus] = useState();
   const [timeArr, setTimeArr] = useState();
   const [peopleArr, setPeopleArr] = useState()
   const [availableTypes, setAvailableTypes] = useState([]);
@@ -89,32 +93,55 @@ export function Book(props) {
         <div>
         <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
         <img src={logo} alt='Company logo' className='imageForMobile' />
-        <main style={{display: 'flex', width: '100%', height: '100%'}}>
-            <Image />
-          <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
-            <NavBar 
-              selectedType={selectedType}
-              peopleAmount={peopleAmount}
-              selectedDate={selectedDate}
-              selectedTime={selectedTime}
-              setStepCount={setStepCount}
-              stepCount={stepCount}
-            />
-            {
-              stepCount === 1 ? <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
-              stepCount === 2 ? <PeopleForm bold={true} peopleArr={peopleArr} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
-              stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-              stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
-              <Confirmation 
-                selectedType={selectedType}   
-                selectedTime={selectedTime} 
-                peopleAmount={peopleAmount}
-                selectedDate={selectedDate}
-                setStepCount={setStepCount}
-              />
-            }
-          </div>
-        </main>
+        {
+          bookingStatus ? (
+            <div style={{marginTop: '20%'}}>
+              <BsCheckCircle style={{
+                  fontSize: 50,
+                  color: 'green',
+                  margin: 'auto'
+              }} />
+              <p>Vi har tagit emot din bokning.</p>
+              <p>Du kommer inom kort att få ett bekräftelsemejl.</p>
+              <p>Tack så mycket</p>
+              <a style={{textDecoration: 'none'}} href='https://kaisekimalmo.se/'>
+                <button className='Next'>
+                  Okej
+                </button>
+              </a>
+            </div>
+          )
+          :
+          (              
+            <main style={{display: 'flex', width: '100%', height: '100%'}}>
+                <Image />
+              <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
+                <NavBar 
+                  selectedType={selectedType}
+                  peopleAmount={peopleAmount}
+                  selectedDate={selectedDate}
+                  selectedTime={selectedTime}
+                  setStepCount={setStepCount}
+                  stepCount={stepCount}
+                />
+                {
+                  stepCount === 1 ? <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
+                  stepCount === 2 ? <PeopleForm bold={true} peopleArr={peopleArr} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
+                  stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
+                  stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
+                  <Confirmation 
+                    selectedType={selectedType}   
+                    selectedTime={selectedTime} 
+                    peopleAmount={peopleAmount}
+                    selectedDate={selectedDate}
+                    setStepCount={setStepCount}
+                    setBookingStatus={setBookingStatus}
+                  />
+                }
+              </div>
+            </main>
+          )
+        }
         </div>
         <BookingFooter />
       </>

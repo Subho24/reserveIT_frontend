@@ -68,7 +68,7 @@ export const Confirmation = (props) => {
         }).then(res => {
             console.log(res.data)
             setModalOpen(true)
-            setBookingStatus('success')
+            props.setBookingStatus('success')
         }).catch(err => {
             console.log(err);
             setModalOpen(true)
@@ -121,12 +121,12 @@ export const Confirmation = (props) => {
 
     return (
         <div>
-            <div className="detailsContainer" >
+            {/* <div className="detailsContainer" >
                 <p className="confirmType" >Typ: {props.selectedType} </p>
                 <p className="confirmPeople" >Antal personer: {props.peopleAmount} </p>
                 <p className="confirmDate" >Datum: {props.selectedDate} </p>
                 <p className="confirmTime" >Tid: {props.selectedTime} </p>
-            </div>
+            </div> */}
             <Box sx={{p: '0px 5% 5% 5%'}}  >
                 <div style={{display: "flex", flexWrap: 'wrap'}}>     
                     <TextField id="filled-basic" type={"text"} label="Namn" variant="filled" 
@@ -170,18 +170,11 @@ export const Confirmation = (props) => {
                         <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="Jag bekräftar bokningen och att informationen jag lämnat är korrekt. *" sx={{m: 1}}  />
                     </FormControl>
                 </div>
-                <input type='submit' className='Next' value={'Book'} onClick={validateCustomerInfo}/>
+                <input type='submit' className='Next' value={'Boka'} onClick={validateCustomerInfo}/>
                 <Modal open={modalOpen} >
                     {modalContent}
                 </Modal>
             </Box>
         </div>
-        // <div>
-        //     <BsCheckCircle style={{
-        //         fontSize: 50,
-        //         color: 'green',
-        //         margin: 'auto'
-        //     }} />
-        // </div>
     )
 }
