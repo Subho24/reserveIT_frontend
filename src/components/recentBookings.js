@@ -27,7 +27,8 @@ export const RecentBookingsList = (props) => {
             customer_email: booking.customer_email,
             booking_comments: booking.booking_comments,
             booking_time: booking.booking_time,
-            booked_time: booking.booked_time ? new Date(booking.booked_time).toLocaleString() : null
+            booked_time: booking.booked_time,
+            booking_date: booking.booking_date
         });
         setModalOpen(true);
     }
@@ -59,6 +60,9 @@ export const RecentBookingsList = (props) => {
                             </li>
                             <li>
                                 <h3><span style={{color: 'red'}}>Booking Time</span>: {customerInfo.booking_time}</h3>
+                            </li>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Booking Date</span>: {customerInfo.booking_date}</h3>
                             </li>
                             <li>
                                 <h3><span style={{color: 'red'}}>Comments</span>: {customerInfo.booking_comments ? customerInfo.booking_comments : '----'}</h3>
