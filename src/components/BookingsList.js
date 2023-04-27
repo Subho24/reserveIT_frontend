@@ -31,7 +31,9 @@ export const BookingList = (props) => {
         setCustoemrInfo({
             customer_name: booking.customer_name,
             customer_mobile: booking.customer_mobile,
-            customer_email: booking.customer_email
+            customer_email: booking.customer_email,
+            booking_time: booking.booking_time,
+            booked_time: booking.booked_time ? new Date(booking.booked_time).toLocaleString() : null 
         });
         setModalOpen(true);
     }
@@ -45,15 +47,35 @@ export const BookingList = (props) => {
     const modalContent = (
         <div className="confirmModal">
             <AiOutlineCloseCircle onClick={() => setModalOpen(false)} style={{float: 'right', padding: 10}} />
+            {
+                customerInfo !== null ? (
+                    <span style={{float: 'right', padding: 10}} >Received: {!customerInfo.booked_time ? '----' : customerInfo.booked_time }</span>
+                )
+                :
+                <span>----</span>
+
+            }
             <h1>Customer Details</h1>
-            <ul>
+            <ul style={{listStyle: 'none', textAlign: 'left', padding: '10px'}}>
                 {
                     customerInfo !== null ? (
-                        <li style={{display: 'inline-flex', flexWrap: 'wrap'}}>
-                            <h3>Customer Name: {customerInfo.customer_name}</h3>
-                            <h3>Customer Mobile: {customerInfo.customer_mobile}</h3>
-                            <h3>Customer Email: {customerInfo.customer_email}</h3>
-                        </li>
+                        <>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Customer Name</span>: {customerInfo.customer_name}</h3>
+                            </li>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Customer Mobile</span>: {customerInfo.customer_mobile}</h3>
+                            </li>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Customer Email</span>: {customerInfo.customer_email}</h3>
+                            </li>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Booking Time</span>: {customerInfo.booking_time}</h3>
+                            </li>
+                            <li>
+                                <h3><span style={{color: 'red'}}>Comments</span>: {customerInfo.booking_comments ? customerInfo.booking_comments : '----'}</h3>
+                            </li>
+                        </>
                     ) : <p>----</p>
                 }
             </ul> 

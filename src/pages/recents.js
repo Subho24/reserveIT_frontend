@@ -13,7 +13,7 @@ export const Recents = (props) => {
     const redirect = useNavigate();
 
     useEffect(() => {
-        axios.get(`/api/bookings/${companyId}`, {
+        axios.get(`/api/bookings/${companyId}/`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

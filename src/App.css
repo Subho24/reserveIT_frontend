@@ -220,7 +220,8 @@
     background-color: whitesmoke;
     flex-direction: column;
     border-radius: 30px;
-    margin: 2%;
+    margin: 10%;
+    font-size: 0.7em;
   }
 
   .phoneContainer {
