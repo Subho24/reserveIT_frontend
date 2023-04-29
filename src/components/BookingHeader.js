@@ -24,7 +24,6 @@ export const BookingHeader = (props) => {
             <h1 style={{display: 'inline-block'}}>
                 {props.companyInfo.company_name}
             </h1>
-            <img src={logo} alt="uk logo" style={imgStyle} />
         </div>
     )
 }

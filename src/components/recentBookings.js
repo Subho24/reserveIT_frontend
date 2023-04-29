@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { BiCommentCheck } from 'react-icons/bi';
 import { Box, Modal, Card, CardContent } from "@mui/material";
 
 
@@ -21,13 +22,18 @@ export const RecentBookingsList = (props) => {
     const recentBookings = props.bookings;
 
     const handleCustomerInfoClick = (booking) => {
+        let date, time;
+        if(booking.booked_time) {
+            [date, time] = booking.booked_time.split('T')
+            time = time.split('.')[0].split(':')[0] +':'+ time.split('.')[0].split(':')[1];
+        }
         setCustoemrInfo({
             customer_name: booking.customer_name,
             customer_mobile: booking.customer_mobile,
             customer_email: booking.customer_email,
             booking_comments: booking.booking_comments,
             booking_time: booking.booking_time,
-            booked_time: booking.booked_time,
+            booked_time: !booking.booked_time ? '----' : `${date} || ${time}`,
             booking_date: booking.booking_date
         });
         setModalOpen(true);
@@ -38,7 +44,7 @@ export const RecentBookingsList = (props) => {
             <AiOutlineCloseCircle onClick={() => setModalOpen(false)} style={{float: 'right', padding: 10}} />
             {
                 customerInfo !== null ? (
-                    <span style={{float: 'right', padding: 10}} >Received: {!customerInfo.booked_time ? '----' : customerInfo.booked_time }</span>
+                    <span style={{float: 'right', padding: 10, fontWeight: 'bolder', color: 'darkgray'}} >Received: {customerInfo.booked_time}</span>
                 )
                 :
                 <span>----</span>
@@ -120,6 +126,9 @@ export const RecentBookingsList = (props) => {
                                 <CardContent>
                                     <span style={{float: 'left'}}>{booking.booking_time}</span>
                                     <span style={typeStyle}>{booking.booking_type} </span>
+                                    {
+                                        booking.booking_comments ? <BiCommentCheck style={{float: 'right', padding: '3px 10px 0px 0px'}} /> : null
+                                    }
                                     <br/>
                                     <br/>
                                     <span style={nameStyle}>{booking.customer_name}</span>

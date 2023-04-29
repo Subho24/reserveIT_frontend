@@ -84,14 +84,14 @@ export function Header() {
               setAnchorEl(null);
             }}
         >
-            Bookings
+            Calendar
         </MenuItem>
         <MenuItem onClick={() => {
               redirect(`/recents/${companyId}`)
               setAnchorEl(null);
             }}
         >
-            Recents
+            All bookings
         </MenuItem>
       </Menu>
     </div>
