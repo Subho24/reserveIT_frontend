@@ -12,8 +12,23 @@ export const TimeForm = (props) => {
     //     })
     // }, [])
 
-    const handleOnClick = (e) => {
-        props.setSelectedTime(e.target.innerText);
+    const handleOnClick = ({target}) => {
+        const now = new Date();
+        const selectedDate = new Date(props.selectedDate)
+        const selectedTime = new Date(`${selectedDate.getMonth() + 1} ${selectedDate.getDate()}, ${selectedDate.getFullYear()} ${target.innerText} `)
+
+        if(selectedDate.toLocaleDateString() === now.toLocaleDateString()) {
+
+            if(selectedTime.getHours() - 3 >= now.getHours()) {
+                props.setSelectedTime(target.innerText);
+                props.setStepCount(5);
+                return;
+            } else {
+                alert('Vald tid är inte tillgänglig')
+                return;
+            }
+        }
+        props.setSelectedTime(target.innerText);
         props.setStepCount(5);
     }
 
@@ -22,15 +37,6 @@ export const TimeForm = (props) => {
             <div className='formContainer' >
                 <h1>Välj tid</h1>
                 <div className='input'>
-                    {/* <BsClock className='clockIcon'/>
-                    < Select 
-                        backspaceRemovesValue = {true}
-                        isClearable={false}
-                        isSearchable={false}
-                        options={availableTimes}
-                        isDisabled={false}
-                        onChange={(e) => inputValue = e.value}
-                    /> */}
                     {                     
                         props.timeArr ? props.timeArr.map(time => <span className='floatingTabs' onClick={handleOnClick} >{time}</span>) : null
                     }

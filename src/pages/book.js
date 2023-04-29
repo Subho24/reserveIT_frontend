@@ -128,7 +128,7 @@ export function Book(props) {
                   stepCount === 1 ? <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
                   stepCount === 2 ? <PeopleForm bold={true} peopleArr={peopleArr} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
                   stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-                  stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedType={selectedType} /> :
+                  stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedDate={selectedDate} /> :
                   <Confirmation 
                     selectedType={selectedType}   
                     selectedTime={selectedTime} 

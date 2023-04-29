@@ -1,15 +1,10 @@
 export const DateForm = (props) => {
+
     const handleOnClick = () => {
         const inputValue = document.getElementById('date').value;
-        const today = new Date();
-        const selectedDate = new Date(inputValue)
-        if(today.getTime() >= selectedDate.getTime()) {
-            alert('Please select a valid date')
-            return
-        }
 
         if(inputValue === '') {
-            alert('Please select a date')
+            alert('Välj ett datum')
             return
         }
         props.setSelectedDate(inputValue);
@@ -17,6 +12,14 @@ export const DateForm = (props) => {
     }
 
     const handleChange = (target) => {
+        const today = new Date();
+        const selectedDate = new Date(target.value)
+
+        if(selectedDate.getDate() < today.getDate() && selectedDate.getMonth() <= today.getMonth()) {
+            alert('Välj ett giltigt datum');
+            return
+        }
+        
         props.setSelectedDate(target.value)
     }
 

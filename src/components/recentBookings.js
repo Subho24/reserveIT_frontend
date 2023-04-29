@@ -82,7 +82,8 @@ export const RecentBookingsList = (props) => {
         borderRadius: '5px',
         fontWeight: 'bolder',
         height: '25px',
-        background: 'aliceblue'
+        background: 'aliceblue',
+        textAlign: 'center'
     }
 
     const typeStyle = {
