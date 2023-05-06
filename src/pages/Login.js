@@ -53,6 +53,32 @@ export const Login = (props) => {
         }
     }
 
+    const ipadStyle = {
+        loginContainer: {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '60%',
+            height: '100%',
+            margin: '45% auto',
+            borderRadius: 30
+        },
+
+        input: {
+            width: '60%', 
+            height: 20, 
+            borderRadius: 5,
+            margin: 'auto'
+        },
+
+        button: {
+            width:130, 
+            height: 30, 
+            backgroundColor: 'whitesmoke', 
+            borderRadius: 5,
+            margin: '50px auto'
+        }
+    }
+
     const desktopStyle = {
         loginContainer: {
             display: 'flex',
@@ -87,7 +113,7 @@ export const Login = (props) => {
             minWidth: '100vw',
             minHeight: '100vh'}} 
         >
-            <Box sx={window.innerWidth < 500 ? mobileStyle.loginContainer : desktopStyle.loginContainer}>
+            <Box sx={window.innerWidth < 500 ? mobileStyle.loginContainer : window.innerWidth < 1100 ? ipadStyle.loginContainer : desktopStyle.loginContainer}>
                 <h2>Login</h2>
                 <h3>Email</h3>
                 <input style={window.innerWidth < 500 ? mobileStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>

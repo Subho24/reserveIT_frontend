@@ -82,6 +82,10 @@ export function Book(props) {
         }
       })
     }
+
+    if(peopleAmount) {
+      setSelectedTime(null);
+    }
   }, [selectedType])
 
 

@@ -12,24 +12,46 @@ export const TimeForm = (props) => {
     //     })
     // }, [])
 
-    const handleOnClick = ({target}) => {
+    const timeAvailable = (time) => {
         const now = new Date();
         const selectedDate = new Date(props.selectedDate)
-        const selectedTime = new Date(`${selectedDate.getMonth() + 1} ${selectedDate.getDate()}, ${selectedDate.getFullYear()} ${target.innerText} `)
+        const selectedTime = new Date(`${selectedDate.getMonth() + 1} ${selectedDate.getDate()}, ${selectedDate.getFullYear()} ${time} `)
 
         if(selectedDate.toLocaleDateString() === now.toLocaleDateString()) {
 
             if(selectedTime.getHours() - 3 >= now.getHours()) {
-                props.setSelectedTime(target.innerText);
-                props.setStepCount(5);
-                return;
+                return true
             } else {
-                alert('Vald tid är inte tillgänglig')
-                return;
+                return false
             }
+        } else {
+            return true
         }
-        props.setSelectedTime(target.innerText);
-        props.setStepCount(5);
+    }
+ 
+    const handleOnClick = ({target}) => {
+        // const now = new Date();
+        // const selectedDate = new Date(props.selectedDate)
+        // const selectedTime = new Date(`${selectedDate.getMonth() + 1} ${selectedDate.getDate()}, ${selectedDate.getFullYear()} ${target.innerText} `)
+
+        // if(selectedDate.toLocaleDateString() === now.toLocaleDateString()) {
+
+        //     if(selectedTime.getHours() - 3 >= now.getHours()) {
+        //         props.setSelectedTime(target.innerText);
+        //         props.setStepCount(5);
+        //         return;
+        //     } else {
+        //         alert('Vald tid är inte tillgänglig')
+        //         return;
+        //     }
+        // }
+        if(timeAvailable(target.innerText)) {
+            props.setSelectedTime(target.innerText);
+            props.setStepCount(5);
+        } else {
+            alert('Vald tid är inte tillgänglig')
+            return;
+        }
     }
 
     if(props.timeArr.length > 0) {
@@ -38,7 +60,7 @@ export const TimeForm = (props) => {
                 <h1>Välj tid</h1>
                 <div className='input'>
                     {                     
-                        props.timeArr ? props.timeArr.map(time => <span className='floatingTabs' onClick={handleOnClick} >{time}</span>) : null
+                        props.timeArr ? props.timeArr.map(time => <span className='floatingTabs' onClick={handleOnClick} style={{backgroundColor: timeAvailable(time) ? null : 'lightgrey' }} >{time}</span>) : null
                     }
                 </div>
             </div>

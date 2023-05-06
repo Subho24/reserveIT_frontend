@@ -2,8 +2,8 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { Book } from './pages/book';
-import { Recents } from './pages/recents';
-import { AllBookings } from './pages/allBookings';
+import { Recents } from './pages/allBookings';
+import { AllBookings } from './pages/calendarView';
 import { Login } from './pages/Login';
 
 

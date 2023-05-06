@@ -1,21 +1,40 @@
 import { Box } from "@mui/system"
+import axios from "../axios"
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
-import { BookingList } from "../components/BookingsList"
+import { RecentBookingsList } from "../components/recentBookings"
 import { useNavigate, useParams } from "react-router-dom"
-import { CalendarWrapper } from "../components/calendar"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-export const AllBookings = (props) => {    
+export const Recents = (props) => {    
     const [bookings, setBookings] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [token, setToken] = useState(sessionStorage.getItem('accessToken'))
+    const { companyId } = useParams();
+    const redirect = useNavigate();
+
+    useEffect(() => {
+        axios.get(`/api/bookings/${companyId}/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            console.log(res.data);
+            setBookings(res.data.reverse());
+        })
+        .catch((err) => {
+            console.log(err);
+            if(err.response.status === 403) {
+                redirect('/login');
+            }
+        })
+    }, [])
 
     return (
         <>
             <Header />
             <Box style={{margin: '0px 20px 0 20px'}} >
-                <CalendarWrapper setSelectedDate={setSelectedDate} setBookings={setBookings} />
-                <BookingList selectedDate={selectedDate} bookings={bookings}  />
+                <RecentBookingsList bookings={bookings} />
             </Box>
             <Footer />
         </>

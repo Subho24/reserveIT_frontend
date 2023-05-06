@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { useEffect, useState } from "react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { BsDot } from 'react-icons/bs'
 import Calendar from "react-calendar";
 import 'react-calendar/dist/Calendar.css';
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,16 +13,14 @@ export const CalendarWrapper = (props) => {
     const [token, setToken] = useState(sessionStorage.getItem('accessToken'))
 
     const [currDate, setCurrDate] = useState(new Date());
+    const [allBookings, setAllbookings] = useState([]);
 
     const handleChange = (value) => {
-        console.log('working')
-        console.log(value);
         setCurrDate(value);
         props.setSelectedDate(`${currDate.getFullYear()}-${currDate.getMonth() + 1}-${currDate.getDate()}`)
     }
 
     useEffect(() => {
-        console.log(currDate)
         axios.get(`/api/bookings/${companyId}/?custom=booking_date&for="${currDate.getFullYear()}-${currDate.getMonth() + 1 >= 10 ? '' : '0'}${currDate.getMonth() + 1}-${currDate.getDate() >= 10 ? '' : '0'}${currDate.getDate()}"`, {
         // axios.get(`/api/bookings/${companyId}/`, {
             headers: {
@@ -29,7 +28,6 @@ export const CalendarWrapper = (props) => {
             }
         })
         .then((res) => {
-            console.log(res.data)
             props.setBookings(res.data)
         })
         .catch((err) => {
@@ -40,10 +38,53 @@ export const CalendarWrapper = (props) => {
         });
     }, [currDate])
 
+    useEffect(() => {
+        axios.get(`/api/bookings/${companyId}/`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            setAllbookings(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+            if(err.response.status === 403) {
+                nav('/login');
+            }
+        });
+    }, [companyId, nav, token])
+
+    const bookingAvailable = (date) => {
+        if (allBookings.length > 1) {
+          for (let i = 0; i < allBookings.length; i++) {
+            if(allBookings[i].booking_date === date) {
+              return true;
+            }
+          }
+        }
+        return false;
+    };
+
+
+    const calendar = 
+    <Calendar 
+        value={currDate}
+        onChange={handleChange} 
+        tileContent=''             
+        tileClassName={({ date }) => {
+            const formatedDate = `${date.getFullYear()}-${date.getMonth() + 1 < 10 ? 0 : ''}${date.getMonth() + 1}-${date.getDate() + 1 <= 10 ? 0 : ''}${date.getDate()}`;
+
+            if(bookingAvailable(formatedDate)) {
+              return 'bookingAvailable';
+            } else {
+              return null;
+            }
+        }}              
+    />
+
+
     return(
-        <Calendar 
-            value={currDate}
-            onChange={handleChange} 
-        />
+        allBookings.length > 1 ? calendar : null
     )
 }
