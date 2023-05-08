@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IconButton, Menu, MenuItem} from '@mui/material'
 import { MoreVert } from '@mui/icons-material';
 import { useNavigate, useParams } from 'react-router-dom';
+import { MdRefresh } from 'react-icons/md'
 
 const headerStyle = {
     display: 'flex',
@@ -65,10 +66,10 @@ export function Header() {
         color="inherit"
         onClick={handleClick}
         style={{
-            float: 'left'
+            float: 'left',
         }}
       >
-        <MoreVert />
+        <MoreVert style={{fontSize: 50}}  />
       </IconButton>
 
       <Menu
@@ -102,6 +103,19 @@ export function Header() {
             Log out
         </MenuItem>
       </Menu>
+
+      <MdRefresh
+        style={{
+          float: 'right',
+          color: 'white',
+          fontSize: 50,
+          padding: 8
+        }}
+        onClick={() => {
+          window.location.reload();
+        }}
+      />
+
     </div>
   );
 }
