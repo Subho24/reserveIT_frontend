@@ -34,7 +34,7 @@ export const DateForm = (props) => {
             <br />
             <input type={'date'} id='date' min={today} value={props.selectedDate} onChange={(e) => handleChange(e.target)} />
             <br />
-            <input type={'submit'} value={'Next'} className='Next' onClick={handleOnClick} />
+            <input type={'submit'} value={'bttn'} className='bttn' onClick={handleOnClick} />
         </div>
     )
 }

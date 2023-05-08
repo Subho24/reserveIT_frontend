@@ -67,11 +67,10 @@ export const Confirmation = (props) => {
             "customer_email": customerEmail
         }).then(res => {
             console.log(res.data)
-            setModalOpen(true)
             props.setBookingStatus('success')
         }).catch(err => {
             console.log(err);
-            setModalOpen(true)
+            props.setBookingStatus('error')
         })
     }
 
@@ -96,17 +95,17 @@ export const Confirmation = (props) => {
 
     const modalContent = bookingStatus === 'success' ?
     (
-        <div className="confirmModal">
+        <div className="modal">
             <h1>Booking confirmed</h1>
             <BsCheckCircle style={{
                 fontSize: 50,
                 color: 'green',
                 margin: 'auto'
             }} />
-            <button className="Next" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Okay</button>
+            <button className="bttn" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Okay</button>
         </div>
     ) : (
-        <div className="confirmModal">
+        <div className="modal">
             <h1>Error!!</h1>
             <h3>Something went wrong!!</h3>
             <h3>Please try again later</h3>
@@ -115,7 +114,7 @@ export const Confirmation = (props) => {
                 color: 'red',
                 margin: 'auto'
             }} />
-            <button className="Next" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Close</button>
+            <button className="bttn" style={{margin: '60px auto 60px auto'}} onClick={closeModal} >Close</button>
         </div>
     )
 
@@ -170,7 +169,7 @@ export const Confirmation = (props) => {
                         <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="Jag bekräftar bokningen och att informationen jag lämnat är korrekt." sx={{m: 1}}  />
                     </FormControl>
                 </div>
-                <input type='submit' className='Next' value={'Boka'} onClick={validateCustomerInfo}/>
+                <input type='submit' className='bttn' value={'Boka'} onClick={validateCustomerInfo}/>
                 <Modal open={modalOpen} >
                     {modalContent}
                 </Modal>

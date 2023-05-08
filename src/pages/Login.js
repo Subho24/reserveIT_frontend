@@ -59,13 +59,13 @@ export const Login = (props) => {
             flexDirection: 'column',
             width: '60%',
             height: '100%',
-            margin: '45% auto',
+            margin: '25% auto 0px auto',
             borderRadius: 30
         },
 
         input: {
-            width: '60%', 
-            height: 20, 
+            width: '100%', 
+            height: 40, 
             borderRadius: 5,
             margin: 'auto'
         },
@@ -83,12 +83,12 @@ export const Login = (props) => {
         loginContainer: {
             display: 'flex',
             flexDirection: 'column',
-            position: 'absolute',
-            width: '100%',
+            // position: 'absolute',
+            width: '45%',
             height: '100%',
-            margin: 'auto',
-            top: '30%',
-            left: '30%',
+            margin: '10% auto 0px auto',
+            // top: '30%',
+            // left: '30%',
             borderRadius: 30
         },
 
@@ -116,9 +116,9 @@ export const Login = (props) => {
             <Box sx={window.innerWidth < 500 ? mobileStyle.loginContainer : window.innerWidth < 1100 ? ipadStyle.loginContainer : desktopStyle.loginContainer}>
                 <h2>Login</h2>
                 <h3>Email</h3>
-                <input style={window.innerWidth < 500 ? mobileStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
+                <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
                 <h3>Password</h3>
-                <input style={window.innerWidth < 500 ? mobileStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
+                <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
                 <button style={window.innerWidth < 500 ? mobileStyle.button : desktopStyle.button} onClick={handleLogin} >Login</button>
             </Box>
         </Box>

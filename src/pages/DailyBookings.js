@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { CalendarWrapper } from "../components/calendar"
 import { useState } from "react"
 
-export const AllBookings = (props) => {    
+export const DailyBookings = (props) => {    
     const [bookings, setBookings] = useState([]);
     const [selectedDate, setSelectedDate] = useState(null);
 
@@ -15,7 +15,7 @@ export const AllBookings = (props) => {
             <Header />
             <Box style={{margin: '0px 20px 0 20px'}} >
                 <CalendarWrapper setSelectedDate={setSelectedDate} setBookings={setBookings} />
-                <BookingList selectedDate={selectedDate} bookings={bookings}  />
+                <BookingList selectedDate={selectedDate} bookings={bookings} token={props.token}  />
             </Box>
             <Footer />
         </>

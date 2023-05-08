@@ -38,6 +38,7 @@
   
   .typeContainer {
     margin-top: 2%;
+    margin-bottom: 15%;
   }
   .type {
     width: 50%;
@@ -99,7 +100,7 @@
     text-align: center;
   }
   
-  .Next {
+  .bttn {
     margin: 50px auto auto auto;
     text-align: center;
     border: 2px solid black;
@@ -112,11 +113,15 @@
     color: white;
   }
   
-  .Next:hover {
+  .bttn:hover {
     background-color: black;
     color: white;
     font-weight: bold;
     box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+
+  .bttn.warn:hover {
+    background-color: red;
   }
   
   .type:hover {
@@ -209,7 +214,7 @@
     border: 1px solid black;
   }
 
-  .confirmModal {
+  .modal {
     /* padding: 5%; */
     display: flex;
     position: absolute;
@@ -321,7 +326,7 @@
     margin: 20px auto 0 auto;
   }
   
-  .Next {
+  .bttn {
     margin: 50px auto auto auto;
     text-align: center;
     border: 2px solid black;
@@ -334,11 +339,16 @@
     color: white;
   }
   
-  .Next:hover {
+  .bttn:hover {
     background-color: black;
     color: white;
     font-weight: bold;
     box-shadow: 5px 5px 5px 2px rgb(185, 179, 179);
+  }
+
+  .bttn.warn:hover {
+    background-color: red;
+    border: none;
   }
   
   .type:hover {
@@ -439,7 +449,7 @@
     border: 1px solid black;
   }
 
-  .confirmModal {
+  .modal {
     display: flex;
     position: absolute;
     width: 80%;
@@ -469,13 +479,17 @@
     margin: auto;
   }
 
-  .react-calendar button {
+  /* .react-calendar button {
     background-color: transparent;
     border: none;
-  }
+  } */
 
-  .react-calendar__tile:focus {
+  /* .react-calendar__tile:focus {
     background-color: blue;
+  } */
+
+  .react-calendar__tile--range {
+    box-shadow: 0 0 6px 2px black;
   }
 
 }

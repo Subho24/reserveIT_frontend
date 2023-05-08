@@ -93,6 +93,14 @@ export function Header() {
         >
             All bookings
         </MenuItem>
+        <MenuItem onClick={() => {
+            sessionStorage.removeItem('accessToken');
+            redirect(`/login`)
+            setAnchorEl(null);
+          }}
+        >
+            Log out
+        </MenuItem>
       </Menu>
     </div>
   );

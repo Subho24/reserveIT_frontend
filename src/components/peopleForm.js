@@ -13,7 +13,7 @@ export const PeopleForm = (props) => {
                 <input type={'number'}  min={0} max={maxPeople} id='peopleAmount' value={props.peopleAmount} onChange={handleOnChange} required />
             </div>
             <br/>
-            <input type='submit' className='Next' value={'Next'} onClick={handleOnClick} /> */}
+            <input type='submit' className='bttn' value={'bttn'} onClick={handleOnClick} /> */}
             <div className='input'>
                 {props.peopleArr ? props.peopleArr.map(num => {
                     return(

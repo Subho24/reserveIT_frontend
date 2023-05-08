@@ -40,7 +40,7 @@ export const RecentBookingsList = (props) => {
     }
 
     const modalContent = (
-        <div className="confirmModal">
+        <div className="modal">
             <AiOutlineCloseCircle onClick={() => setModalOpen(false)} style={{float: 'right', padding: 10}} />
             {
                 customerInfo !== null ? (

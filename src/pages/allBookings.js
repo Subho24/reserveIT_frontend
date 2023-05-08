@@ -2,7 +2,7 @@ import { Box } from "@mui/system"
 import axios from "../axios"
 import { Header } from "../components/Header"
 import { Footer } from "../components/Footer"
-import { RecentBookingsList } from "../components/recentBookings"
+import { BookingList } from "../components/BookingsList"
 import { useNavigate, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 
@@ -34,7 +34,7 @@ export const Recents = (props) => {
         <>
             <Header />
             <Box style={{margin: '0px 20px 0 20px'}} >
-                <RecentBookingsList bookings={bookings} />
+                <BookingList bookings={bookings} token={token} />
             </Box>
             <Footer />
         </>

@@ -12,6 +12,7 @@ import { Confirmation } from '../components/confirmation';
 import { BookingFooter } from '../components/BookingFooter'
 import { Loading } from '../components/Loading';
 import { BsCheckCircle } from 'react-icons/bs'
+import { BiError } from 'react-icons/bi'
 import { redirect } from 'react-router-dom';
 
 
@@ -98,7 +99,7 @@ export function Book(props) {
         <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
         <img src={logo} alt='Company logo' className='imageForMobile' />
         {
-          bookingStatus ? (
+          bookingStatus === 'success' ? (
             <div style={{marginTop: '20%'}}>
               <BsCheckCircle style={{
                   fontSize: 50,
@@ -109,7 +110,24 @@ export function Book(props) {
               <p>Du kommer inom kort att få ett bekräftelsemejl.</p>
               <p>Tack så mycket</p>
               <a style={{textDecoration: 'none'}} href='https://kaisekimalmo.se/'>
-                <button className='Next'>
+                <button className='bttn'>
+                  Okej
+                </button>
+              </a>
+            </div>
+          )
+          : bookingStatus === 'error' ?
+          (
+            <div style={{marginTop: '20%'}}>
+              <BiError style={{
+                  fontSize: 50,
+                  color: 'red',
+                  margin: 'auto'
+              }} />
+              <p>Något gick fel</p>
+              <p>Försök igen senare.</p>
+              <a style={{textDecoration: 'none'}} href={`https://reserveit.se/book/${props.companyInfo.company_id}`}>
+                <button className='bttn'>
                   Okej
                 </button>
               </a>
