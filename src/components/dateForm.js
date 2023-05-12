@@ -14,11 +14,20 @@ export const DateForm = (props) => {
     const handleChange = (target) => {
         const today = new Date();
         const selectedDate = new Date(target.value)
+        const maxDate = new Date(today.toDateString())
+        maxDate.setMonth(today.getMonth() + 3);
+        console.log(maxDate)
 
         if(selectedDate.getDate() < today.getDate() && selectedDate.getMonth() <= today.getMonth()) {
             alert('Välj ett giltigt datum');
             return
         }
+        
+        if(selectedDate.getMonth() > maxDate.getMonth()) {
+            alert('Du kan boka max 3 månader i förväg');
+            return
+        }
+
         
         props.setSelectedDate(target.value)
     }
@@ -34,7 +43,7 @@ export const DateForm = (props) => {
             <br />
             <input type={'date'} id='date' min={today} value={props.selectedDate} onChange={(e) => handleChange(e.target)} />
             <br />
-            <input type={'submit'} value={'bttn'} className='bttn' onClick={handleOnClick} />
+            <input type={'submit'} value={'Next'} className='bttn' onClick={handleOnClick} />
         </div>
     )
 }

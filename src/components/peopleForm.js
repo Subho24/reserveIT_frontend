@@ -21,7 +21,7 @@ export const PeopleForm = (props) => {
                     )
                 }): null}
             </div>
-            <p className='people'>More than {props.peopleArr ? props.peopleArr.length : null} people? Send a mail to <a href={'https'}>{props.companyInfo.company_email}</a> </p>
+            <p className='people'>Fler än {props.peopleArr ? props.peopleArr.length : null} personer? Skicka ett mejl till <a href={`mailto:${props.companyInfo.company_email}`}>{props.companyInfo.company_email}</a> </p>
         </div>
     )
 }
