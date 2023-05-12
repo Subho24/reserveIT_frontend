@@ -15,11 +15,11 @@ export const TimeForm = (props) => {
     const timeAvailable = (time) => {
         const now = new Date();
         const selectedDate = new Date(props.selectedDate)
-        const selectedTime = new Date(`${selectedDate.getMonth() + 1} ${selectedDate.getDate()}, ${selectedDate.getFullYear()} ${time} `)
+        const selectedTime = parseInt(time.split(':')[0]);
 
         if(selectedDate.toLocaleDateString() === now.toLocaleDateString()) {
 
-            if(selectedTime.getHours() - 3 >= now.getHours()) {
+            if(selectedTime - 3 >= now.getHours()) {
                 return true
             } else {
                 return false

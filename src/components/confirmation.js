@@ -32,7 +32,8 @@ export const Confirmation = (props) => {
         borderBottom: customerPhone ? 'none' : '1px solid #d6413f'
     }
 
-    const validateCustomerInfo = () => {  
+    const validateCustomerInfo = () => {
+        props.setBookingStatus('await');
         console.log(customerName, customerPhone, customerEmail, timeLenthAgreed, countryCode)       
         if(!customerName || !customerPhone || !customerEmail || !timeLenthAgreed) {
             alert('Vänligen fyll i fälten markerade med *')
@@ -169,7 +170,7 @@ export const Confirmation = (props) => {
                         <FormControlLabel control={<Checkbox onClick={toggleTimeAgreement} required={true} />} label="Jag bekräftar bokningen och att informationen jag lämnat är korrekt." sx={{m: 1}}  />
                     </FormControl>
                 </div>
-                <input type='submit' className='bttn' value={'Boka'} onClick={validateCustomerInfo}/>
+                <input type='submit' className='bttn' value={'Boka'} disabled={props.bookingStatus === 'await' ? true : false } onClick={validateCustomerInfo}/>
                 <Modal open={modalOpen} >
                     {modalContent}
                 </Modal>

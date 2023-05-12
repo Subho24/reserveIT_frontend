@@ -100,7 +100,7 @@ export function Book(props) {
         <img src={logo} alt='Company logo' className='imageForMobile' />
         {
           bookingStatus === 'success' ? (
-            <div style={{marginTop: '20%'}}>
+            <div style={{margin: '20%', textAlign: 'center'}}>
               <BsCheckCircle style={{
                   fontSize: 50,
                   color: 'green',
@@ -118,7 +118,7 @@ export function Book(props) {
           )
           : bookingStatus === 'error' ?
           (
-            <div style={{marginTop: '20%'}}>
+            <div style={{marginTop: '20%', textAlign: 'center'}}>
               <BiError style={{
                   fontSize: 50,
                   color: 'red',
@@ -158,6 +158,7 @@ export function Book(props) {
                     selectedDate={selectedDate}
                     setStepCount={setStepCount}
                     setBookingStatus={setBookingStatus}
+                    bookingStatus={bookingStatus}
                   />
                 }
               </div>
