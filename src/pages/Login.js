@@ -1,5 +1,5 @@
 import axios from "../axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { Box, margin } from "@mui/system";
@@ -19,13 +19,16 @@ export const Login = (props) => {
             sessionStorage.setItem('accessToken', token)
 
             const decoded = jwtDecode(token);
-            nav(`/bookings/${decoded.companyId}`)
+            nav(`/admin/bookings/${decoded.companyId}`)
         })
         .catch(err => {
             console.log(err);
         })
     }
-    console.log(window.innerWidth, window.innerHeight)
+
+    useEffect(() => {
+        sessionStorage.removeItem('accessToken')
+    }, [])
 
     const mobileStyle = {
         loginContainer: {

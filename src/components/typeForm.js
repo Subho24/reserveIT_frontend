@@ -6,7 +6,9 @@ export const TypeForm = (props) => {
 
     const handleOnClick = ({target}) => {
         props.setSelectedType(target.innerText)
-        props.setStepCount(2);
+        if(!props.edit) {
+            props.setStepCount(2);
+        }
     }
 
     useEffect(() => {

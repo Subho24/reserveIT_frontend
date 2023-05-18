@@ -1,19 +1,13 @@
 import { useEffect, useState } from 'react';
-import { BookingHeader } from '../components/BookingHeader';
-// import RamenShackLogo from '../RamenShackLogo.png';
-import logo from '../logo.jpg';
-import { Image } from '../components/Image';
-import { NavBar } from '../components/NavBar';
 import { TypeForm } from '../components/typeForm';
-import { PeopleForm } from '../components/peopleForm';
 import { DateForm } from '../components/dateForm';
 import { TimeForm } from '../components/timeForm';
-import { Confirmation } from '../components/confirmation';
 import { BookingFooter } from '../components/BookingFooter'
 import { Loading } from '../components/Loading';
 import { BsCheckCircle } from 'react-icons/bs'
 import { BiError } from 'react-icons/bi'
-import { redirect } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Header } from '../components/Header';
 import axios from '../axios';
 
 
@@ -62,7 +56,7 @@ const getAvailableTimes = (startTime, endTime) => {
   return arr
 }
 
-export function Book(props) {
+export function Edit(props) {
   const [stepCount, setStepCount] = useState(1)
   const [bookingInfo, setBookingInfo] = useState();
   const [bookingStatus, setBookingStatus] = useState();
@@ -73,7 +67,11 @@ export function Book(props) {
   const [peopleAmount, setPeopleAmount] = useState(0);
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedTime, setSelectedTime] = useState(null)
-  const [closedBookings, setClosedBookings] = useState([]);
+  const [closedBookings, setClosedBookings] = useState([])
+  
+  const {companyId} = useParams()
+  const token = sessionStorage.getItem('accessToken')
+
 
 
   useEffect(() => {
@@ -93,12 +91,19 @@ export function Book(props) {
 
   useEffect(() => {
     if(selectedDate) {
-        axios.get(`/api/booking_settings/${props.companyInfo.company_id}/?type=${selectedType}&&date=${selectedDate}`)
+        axios.get(`/api/booking_settings/${companyId}/?type=${selectedType}&&date=${selectedDate}`)
         .then(res => {
             setClosedBookings(res.data)
         })
     }
   }, [selectedDate, selectedType])
+
+  const getClosedBookings = () => {
+    axios.get(`/api/booking_settings/${companyId}/?type=${selectedType}&&date=${selectedDate}`)
+    .then(res => {
+        setClosedBookings(res.data)
+    })
+  }
 
 
   if(props.companyInfo === null) {
@@ -106,9 +111,7 @@ export function Book(props) {
   } else {
     return(
         <>
-        <div>
-        <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
-        <img src={logo} alt='Company logo' className='imageForMobile' />
+        <Header />
         {
           bookingStatus === 'success' ? (
             <div style={{margin: '20%', textAlign: 'center'}}>
@@ -117,10 +120,8 @@ export function Book(props) {
                   color: 'green',
                   margin: 'auto'
               }} />
-              <p>Vi har tagit emot din bokning.</p>
-              <p>Du kommer inom kort att få ett bekräftelsemejl.</p>
-              <p>Tack så mycket</p>
-              <a style={{textDecoration: 'none'}} href='https://kaisekimalmo.se/'>
+              <p>Tiden har gjorts obokningsbar.</p>
+              <a style={{textDecoration: 'none'}} href={`/admin/edit/${props.companyInfo.company_id}`}>
                 <button className='bttn'>
                   Okej
                 </button>
@@ -147,36 +148,24 @@ export function Book(props) {
           :
           (              
             <main style={{display: 'flex', width: '100%', height: '100%'}}>
-                <Image />
               <div className='bookingForm' style={{width: '100%', textAlign: 'center'}}>
-                <NavBar 
-                  selectedType={selectedType}
-                  peopleAmount={peopleAmount}
-                  selectedDate={selectedDate}
-                  selectedTime={selectedTime}
-                  setStepCount={setStepCount}
-                  stepCount={stepCount}
-                />
+                <h2>Edit Settings for</h2>
+                <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} />
                 {
-                  stepCount === 1 ? <TypeForm bold={true} companyInfo={props.companyInfo} setAvailableTypes={setAvailableTypes} AvailableTypes={availableTypes} setSelectedType={setSelectedType} setStepCount={setStepCount} /> :
-                  stepCount === 2 ? <PeopleForm bold={true} peopleArr={peopleArr} companyInfo={props.companyInfo} peopleAmount={peopleAmount} setPeopleAmount={setPeopleAmount} setStepCount={setStepCount} selectedType={selectedType} /> :
-                  stepCount === 3 ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} setStepCount={setStepCount} /> :
-                  stepCount === 4 ? <TimeForm bold={true} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} setStepCount={setStepCount} selectedDate={selectedDate} closedBookings={closedBookings} /> :
-                  <Confirmation 
-                    selectedType={selectedType}   
-                    selectedTime={selectedTime} 
-                    peopleAmount={peopleAmount}
-                    selectedDate={selectedDate}
-                    setStepCount={setStepCount}
-                    setBookingStatus={setBookingStatus}
-                    bookingStatus={bookingStatus}
-                  />
+
+                    selectedType ? <DateForm bold={true} companyInfo={props.companyInfo} selectedDate={selectedDate} setSelectedDate={setSelectedDate} edit={true} /> 
+                    :
+                    null
+                }
+                {
+                    selectedDate ? <TimeForm bold={true} edit={true} token={token} getClosedBookings={getClosedBookings} timeArr={timeArr} companyInfo={props.companyInfo} selectedTime={selectedTime} setSelectedTime={setSelectedTime} selectedDate={selectedDate} selectedType={selectedType} closedBookings={closedBookings} /> 
+                    :
+                    null
                 }
               </div>
             </main>
           )
         }
-        </div>
         <BookingFooter />
       </>
     )

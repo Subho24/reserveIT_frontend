@@ -81,18 +81,25 @@ export function Header() {
         placement="bottom-end"
       >
         <MenuItem onClick={() => {
-              redirect(`/bookings/${companyId}`)
+              redirect(`/admin/bookings/${companyId}`)
               setAnchorEl(null);
             }}
         >
             Calendar
         </MenuItem>
         <MenuItem onClick={() => {
-              redirect(`/recents/${companyId}`)
+              redirect(`/admin/recents/${companyId}`)
               setAnchorEl(null);
             }}
         >
             All bookings
+        </MenuItem>
+        <MenuItem onClick={() => {
+              redirect(`/admin/edit/${companyId}`)
+              setAnchorEl(null);
+            }}
+        >
+            Edit
         </MenuItem>
         <MenuItem onClick={() => {
             sessionStorage.removeItem('accessToken');
