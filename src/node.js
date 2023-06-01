@@ -29,8 +29,8 @@ const User = mongoose.model('User', {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'kajkona.twitch@gmail.com',
-    pass: 'P@ssword123!',
+    user: '',
+    pass: '',
   },
 });
 
@@ -56,7 +56,7 @@ app.post('/api/send-reset-email', async (req, res) => {
     // Wysłanie wiadomości e-mail z kodem resetu hasła
     // Sending an email with a password reset code
     await transporter.sendMail({
-      from: 'sam@kaisekimalmo.se',
+      from: '',
       to: email,
       subject: 'Reset Password Code',
       text: `Hello,\n\nHere is your password reset code: ${resetCode}\n\nBest regards,\nThe Example Team`,
