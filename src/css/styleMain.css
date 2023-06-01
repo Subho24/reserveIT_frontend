@@ -1,0 +1,224 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Brush Script MT', 'cursive';
+	font-size:x-large;
+}
+.main_container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.Why{
+	margin-left: 500px;
+	align-items: center;
+}
+.whyReserveIT{
+	margin-top: 3px;
+	margin-left: 240px;
+}
+.col-left {
+	margin-top: 50px;
+	margin-left: 150px;
+	width: 682px;
+	height: 800px;
+	background-image: url(../bgimg.jpg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-right: 2px;
+}
+.col-right {
+	flex: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-left: 2px;
+}
+
+.col-right .box{
+	align-items: center;
+	width: 800px;
+	height: 800px;
+}
+.boxdown{
+	background-color: #ccc;
+	padding: 15px;
+	margin-top:65px;
+	margin-bottom: 5px;
+	text-align: center;
+	width: fit-content;
+	height: 100px;
+}
+
+.grey{
+	margin:1px;
+	background-color: #555;
+	width: max-content;
+	height: 110px;
+}
+.box_lineWithe{
+	width: fit-content;
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+.col-left.box{
+	width: 90%;
+	height:10%;
+}
+.cards_bg {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+/* Style the navigation bar */
+.navbar {
+	height:80px;
+	width: 100%;
+	background-color: #555;
+	overflow: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between; /* Add this line to position items at opposite ends */
+  }
+  
+  .navbar a {
+	text-align: center;
+	padding: 12px;
+	color: white;
+	text-decoration: none;
+	font-size: 26px;
+	flex: 1; /* Add this line to distribute remaining space evenly */
+  }
+  
+  .navbar .login {
+	order: 2; /* Move the login element to the right */
+  }
+  
+  .navbar .logo {
+	order: 0; /* Move the logo element to the left */
+  }
+  
+  /* Add responsiveness */
+  @media screen and (max-width: 500px) {
+	.navbar a:not(:first-child):not(:last-child) {
+	  display: none; /* Hide the middle links */
+	}
+  
+	.navbar .menu-icon {
+	  display: block; /* Show the menu icon */
+	}
+  }
+  
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	max-width: 300px;
+	margin: auto;
+	text-align: center;
+	font-family: arial;
+  }
+  
+  .price {
+	color: grey;
+	font-size: 22px;
+  }
+  
+  .card button {
+	border: none;
+	outline: 0;
+	padding: 12px;
+	color: white;
+	background-color: #000;
+	text-align: center;
+	cursor: pointer;
+	width: 100%;
+	font-size: 18px;
+  }
+  
+  .card button:hover {
+	opacity: 0.7;
+  }
+.box {
+	background-color: #ccc;
+	padding: 15px;
+	margin-bottom: 5px;
+	width: 800px;
+	height: 400px;
+}
+
+
+.baner {
+	background: #1a1a1a;
+	width: auto;
+	padding: 10px 10%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: relative;
+}
+
+.baner ul {
+	width: 100%;
+	text-align: right;
+}
+
+.baner ul li {
+	display: inline-block;
+	list-style: none;
+	margin: 10px 20px;
+}
+
+.baner ul li a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.logo img {
+	height: 50px;
+}
+
+nav ul {
+	list-style: none;
+	display: flex;
+}
+
+nav li {
+	margin: 0 10px;
+}
+
+nav a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.button {
+	padding: auto;
+	align-items: center;
+	margin: auto;
+	width: 480px;
+	height: 120px;
+	display: flex;
+}
+
+.login{
+	background: #FF416C;
+	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0 0;
+	color: #FFFFFF;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+main {
+	padding: 20px;
+}
