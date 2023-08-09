@@ -65,7 +65,7 @@ const getAvailableTimes = (startTime, endTime) => {
 export function Book(props) {
   const [stepCount, setStepCount] = useState(1)
   const [bookingInfo, setBookingInfo] = useState();
-  const [bookingStatus, setBookingStatus] = useState();
+  const [bookingStatus, setBookingStatus] = useState(null);
   const [timeArr, setTimeArr] = useState();
   const [peopleArr, setPeopleArr] = useState()
   const [availableTypes, setAvailableTypes] = useState([]);

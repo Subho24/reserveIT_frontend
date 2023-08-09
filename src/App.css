@@ -8,6 +8,26 @@
 /* For screens < 500px */
 
 @media screen and (max-width: 500px) {
+
+  .punch {
+    width: 25%;
+  }
+
+  .pnInput {
+    width: 100%;
+    height: 60px;
+    font-size: 1.5em;
+    text-align: center;    
+  }
+  
+  .keypadDials {
+    width: 33%;
+    height: 60%;
+    font-size: 35px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+  }
   
   .floatingTabs {
     background-color: lightgreen;
@@ -257,6 +277,22 @@
 /* For screens > than 500px */
 
 @media screen and (min-width: 500px) {
+
+  .pnInput {
+    width: 100%;
+    height: 60px;
+    font-size: 200%;
+    text-align: center;
+  }
+
+  .keypadDials {
+    width: 30%;
+    height: 60%;
+    font-size: 49px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+  }
   
   .floatingTabs {
     background-color: lightgreen;
@@ -345,6 +381,12 @@
     min-width: 80px;
     background-color: black;
     color: white;
+  }
+
+  .punch {
+    width: 25%;
+    height: 70px;
+    font-size: 25px;
   }
   
   .bttn:hover {

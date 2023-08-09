@@ -102,6 +102,20 @@ export function Header() {
             Edit
         </MenuItem>
         <MenuItem onClick={() => {
+              redirect(`/admin/punch/${companyId}`)
+              setAnchorEl(null);
+            }}
+        >
+            Punch Clock
+        </MenuItem>
+        <MenuItem onClick={() => {
+              redirect(`/admin/punches/${companyId}`)
+              setAnchorEl(null);
+            }}
+        >
+            Punches
+        </MenuItem>
+        <MenuItem onClick={() => {
             sessionStorage.removeItem('accessToken');
             redirect(`/login`)
             setAnchorEl(null);
