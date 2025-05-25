@@ -7,21 +7,33 @@ import { Box, margin } from "@mui/system";
 export const Login = (props) => {
     const [email, setEmail] = useState(null);
     const [pass, setPass] = useState(null);
+    const [loggedIn, setLoggedIn] = useState(null);
+    const [platform, setPlatform] = useState(null);
     const nav = useNavigate();
 
+    const handlePlatform = (platform) => {
+        setPlatform(platform);
+    }
+
     const handleLogin = () => {
-        axios.post('/auth', {
+        // axios.post(`/auth/${platform === 'Booking' ? 'booking' : 'punchClock'}`, {
+        //     userName: email,
+        //     userPass: pass
+        // })
+        axios.post(`/auth/booking`, {
             userName: email,
             userPass: pass
         })
         .then(res => {
             const token = res.data.token;
             sessionStorage.setItem('accessToken', token)
+            setLoggedIn(true)
 
             const decoded = jwtDecode(token);
             nav(`/admin/bookings/${decoded.companyId}`)
         })
         .catch(err => {
+            err.response.status === 403 ? setLoggedIn('Forbidden') : setLoggedIn(false);
             console.log(err);
         })
     }
@@ -117,12 +129,66 @@ export const Login = (props) => {
             minHeight: '100vh'}} 
         >
             <Box sx={window.innerWidth < 500 ? mobileStyle.loginContainer : window.innerWidth < 1100 ? ipadStyle.loginContainer : desktopStyle.loginContainer}>
-                <h2>Login</h2>
-                <h3>Email</h3>
-                <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
-                <h3>Password</h3>
-                <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
-                <button style={window.innerWidth < 500 ? mobileStyle.button : desktopStyle.button} onClick={handleLogin} >Login</button>
+                {/* {
+                    platform === 'Booking' ? (
+                        <>
+                            <h2>Login</h2>
+                            <h3>Email</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
+                            <h3>Password</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
+                            {
+                                loggedIn === false ? 
+                                    <p style={{color: 'red'}}>Invalid username or password</p>
+                                : loggedIn === 'Forbidden' ?
+                                    <p style={{color: 'red'}}>You do not have access to this service</p>
+                                :
+                                    null
+                            }
+                            <button style={window.innerWidth < 500 ? mobileStyle.button : desktopStyle.button} onClick={handleLogin} >Login</button>
+                        </>
+                    )
+                    : 
+                    platform === 'PunchClock' ? (
+                        <>
+                            <h2>Login</h2>
+                            <h3>Email</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
+                            <h3>Password</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
+                            {
+                                loggedIn === false ? 
+                                    <p style={{color: 'red'}}>Invalid username or password</p>
+                                : loggedIn === 'Forbidden' ?
+                                    <p style={{color: 'red'}}>You do not have access to this service</p>
+                                :
+                                    null
+                            }
+                            <button style={window.innerWidth < 500 ? mobileStyle.button : desktopStyle.button} onClick={handleLogin} >Login</button>
+                        </>
+                    )
+                    : 
+                    (
+                        <>
+                            <button className="bttn" style={{height: 60, width: 150, fontSize: 15}} onClick={() => handlePlatform('Booking')} >Booking System</button>
+                            <button className="bttn" style={{height: 60, width: 150, fontSize: 15}} onClick={() => handlePlatform('PunchClock')} >Punch Clock</button>
+                        </>
+                    )
+                } */}
+                            <h2>Login</h2>
+                            <h3>Email</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'email'} onChange={(e) => setEmail(e.target.value)} ></input>
+                            <h3>Password</h3>
+                            <input style={window.innerWidth < 500 ? mobileStyle.input : window.innerWidth < 1100 ? ipadStyle.input : desktopStyle.input} type={'password'} onChange={(e) => setPass(e.target.value)} ></input>
+                            {
+                                loggedIn === false ? 
+                                    <p style={{color: 'red'}}>Invalid username or password</p>
+                                : loggedIn === 'Forbidden' ?
+                                    <p style={{color: 'red'}}>You do not have access to this service</p>
+                                :
+                                    null
+                            }
+                            <button style={window.innerWidth < 500 ? mobileStyle.button : desktopStyle.button} onClick={handleLogin} >Login</button>
             </Box>
         </Box>
     )

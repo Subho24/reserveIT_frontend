@@ -118,8 +118,7 @@
     min-height: 100vh;
     min-width: 100vw;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
     gap: 10px;
     text-align: center;
   }
@@ -219,19 +218,19 @@
   .NavLink {
     text-decoration: none;
     color: white;
-    padding-top: 10px;
+    padding: 5px;
     border-radius: 5px;
     height: 60%;
     margin: 10px 5px 0px 5px;
   }
   
   .NavLink :hover {
-    background-color: white;
-    color: black;
+    background-color: #7D83FF;
+    color: white;
   }
   .NavLink:active {
-    background-color: white;
-    color: black;
+    background-color: #7D83FF;
+    color: white;
   }
   
   table, th, td {
@@ -267,8 +266,16 @@
     border: none;
   }
   
-  .react-calendar__tile--range {
+  .myCustomCalendar .react-calendar__tile--range {
     box-shadow: 0 0 6px 2px black;
+  }
+
+  .myCustomCalendar {
+    margin-top: -100px
+  }
+
+  .myCustomCalendar .react-calendar__tile--active {
+    background: #7D83FF;
   }
 
 }
@@ -322,9 +329,10 @@
     min-height: 100vh;
     min-width: 100vw;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-direction: row;
     gap: 10px;
+    background-color: #efefef;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
   }
 
   .typeContainer {
@@ -479,20 +487,20 @@
   
   .NavLink {
     text-decoration: none;
-    color: white;
-    padding-top: 10px;
+    color: black;
+    padding: 5px;
     border-radius: 5px;
     height: 60%;
-    margin: 10px 5px 0px 5px;
+    margin: 80px 5px 0px 5px;
   }
   
   .NavLink:hover {
-    background-color: white;
-    color: black;
+    background-color: #7D83FF;
+    color: white;
   }
   .NavLink:active {
-    background-color: white;
-    color: black;
+    background-color: #7D83FF;
+    color: white;
   }
   
   table, th, td {
@@ -527,6 +535,9 @@
 
   .react-calendar {
     margin: auto;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12);
   }
 
   /* .react-calendar button {
@@ -538,8 +549,17 @@
     background-color: blue;
   } */
 
-  .react-calendar__tile--range {
+  .myCustomCalendar .react-calendar__tile--range {
     box-shadow: 0 0 6px 2px black;
+  }
+
+  .myCustomCalendar .react-calendar__tile--active {
+    background-color: #7D83FF;
+  }
+
+  .myCustomCalendar .react-calendar__tile--now {
+    background-color: #7D83FF;
+    color: black;
   }
 
 }

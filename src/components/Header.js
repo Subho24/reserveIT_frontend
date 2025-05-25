@@ -1,44 +1,87 @@
-import { useState } from 'react';
-import { IconButton, Menu, MenuItem} from '@mui/material'
-import { MoreVert } from '@mui/icons-material';
-import { useNavigate, useParams } from 'react-router-dom';
-import { MdRefresh } from 'react-icons/md'
+import { useState } from "react";
+import { IconButton, Menu, MenuItem } from "@mui/material";
+import { MoreVert } from "@mui/icons-material";
+import DehazeIcon from '@mui/icons-material/Dehaze';
+import { Box, color, display, minWidth, positions, textAlign, width } from "@mui/system";
+import { useNavigate, useParams } from "react-router-dom";
+import { MdRefresh } from "react-icons/md";
 
 const headerStyle = {
-    display: 'flex',
-    backgroundColor: '#222222',
-    color: 'white',
-    height: 60,
-    textAlign: 'center',
-    padding: '0px 10px 0px 10px'
-}
+  display: "flex",
+  flexDirection: "row",
+  backgroundColor: "#061A40",
+  color: "white",
+  //height: 60,
+  maxWidth: 150,
+  textAlign: "center",
+  padding: "0px 10px 0px 10px",
+  justifyContent: "center",
+};
 
-// const linkStyle = {
-//     textDecoration: 'none',
-//     color: 'white',
-// }
+const linkStyle = {
+  textDecoration: "none",
+  color: "white",
+};
 
-// export const Header = (props) => {
-//     const { companyId } = useParams();
-//     const redirect = useNavigate();
+export const Header = (props) => {
+  const redirect = useNavigate();
+  const { companyId } = useParams();
 
-//     const handleLogOut = () => {
-//         sessionStorage.removeItem('accessToken');
-//         redirect('/login');
-//     }
+  const handleLogOut = () => {
+    sessionStorage.removeItem("accessToken");
+    redirect("/login");
+  };
 
-//     return (
-//         <Box className='header' style={headerStyle} >
-//             <div className='NavLink'> Bookings</div>
-//             <div className='NavLink'> Recents </div>
-//             <div className='NavLink' style={{marginLeft: 'auto'}} onClick={handleLogOut} >Log out</div>
-//         </Box>
-//     )
-// }
+  return (
+    <Box
+      className="header"
+      style={{
+        backgroundColor: "#D4DCFF",
+        minWidth: 200,
+        textAlign: "center",
+        color: "black"
+      }}
+      // style={{
+      //   ...headerStyle,
+      //   justifyContent: "space-between",
+      //   alignItems: "center",
+      // }}
+    >
+      <Box //style={{ width: "150px" }} 
+      />
+      <Box //style={{ display: "flex", gap: "20px" }}
+      >
+        <div
+          className="NavLink"
+          onClick={() => redirect(`/admin/bookings/${companyId}`)}
+        >
+          Home
+        </div>
+        <div
+          className="NavLink"
+          onClick={() => redirect(`/admin/recents/${companyId}`)}
+        >
+          All bookings
+        </div>
+        <div
+          className="NavLink"
+          onClick={() => redirect(`/admin/edit/${companyId}`)}
+        >
+          Settings
+        </div>
+      </Box>
 
+      {/* Log out aligned to the far right */}
+      <Box>
+        <div className="NavLink" onClick={handleLogOut}>
+          Log out
+        </div>
+      </Box>
+    </Box>
+  );
+};
 
-
-export function Header() {
+export function PhoneHeader() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { companyId } = useParams();
@@ -53,23 +96,22 @@ export function Header() {
   };
 
   return (
-    <div style={{
-        backgroundColor: 'black',
-        color: 'white'
-    }}>
+    <>
       <IconButton
         id="positioned-demo-button"
         aria-controls={open ? 'positioned-demo-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         variant="outlined"
-        color="inherit"
+        color="black"
         onClick={handleClick}
         style={{
-            float: 'left',
+            float: "top",
+            position: "absolute"
         }}
       >
-        <MoreVert style={{fontSize: 50}}  />
+        {/* <MoreVert style={{fontSize: 50}}  /> */}
+        <DehazeIcon style={{fontSize: 40}} />
       </IconButton>
 
       <Menu
@@ -124,19 +166,6 @@ export function Header() {
             Log out
         </MenuItem>
       </Menu>
-
-      <MdRefresh
-        style={{
-          float: 'right',
-          color: 'white',
-          fontSize: 50,
-          padding: 8
-        }}
-        onClick={() => {
-          window.location.reload();
-        }}
-      />
-
-    </div>
+    </>
   );
 }

@@ -22,7 +22,8 @@ export const DateForm = (props) => {
             return
         }
         
-        if(selectedDate.getMonth() > maxDate.getMonth()) {
+        if(selectedDate.getMonth() > maxDate.getMonth() && selectedDate.getFullYear() > maxDate.getFullYear()) {
+            console.log(selectedDate.getMonth(), maxDate.getMonth(), maxDate)
             alert('Du kan boka max 3 månader i förväg');
             return
         }

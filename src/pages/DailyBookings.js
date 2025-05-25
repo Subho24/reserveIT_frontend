@@ -1,5 +1,5 @@
-import { Box } from "@mui/system"
-import { Header } from "../components/Header"
+import { Box, width } from "@mui/system"
+import { Header, PhoneHeader } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { BookingList } from "../components/BookingsList"
 import { useNavigate, useParams } from "react-router-dom"
@@ -12,12 +12,17 @@ export const DailyBookings = (props) => {
 
     return (
         <>
-            <Header />
-            <Box style={{margin: '0px 20px 0 20px'}} >
+            {
+                window.outerWidth < 500 ? 
+                <PhoneHeader/>
+                :
+                <Header/>
+            }
+            {/* <Header /> */}
+            <Box style={{margin: '50px 20px', width: "100%"}} >
                 <CalendarWrapper setSelectedDate={setSelectedDate} setBookings={setBookings} />
                 <BookingList selectedDate={selectedDate} bookings={bookings} token={props.token}  />
             </Box>
-            <Footer />
         </>
 
     )

@@ -106,7 +106,7 @@ export function Book(props) {
   } else {
     return(
         <>
-        <div>
+        <div style={{display: "block",width: "-webkit-fill-available"}}>
         <BookingHeader companyInfo={props.companyInfo} RestaurantName="Sakanaya" setCompanyInfo={props.setCompanyInfo} />
         <img src={logo} alt='Company logo' className='imageForMobile' />
         {
@@ -177,7 +177,7 @@ export function Book(props) {
           )
         }
         </div>
-        <BookingFooter />
+        {/* <BookingFooter /> */}
       </>
     )
   }

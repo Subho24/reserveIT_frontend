@@ -7,7 +7,7 @@ import { BsCheckCircle } from "react-icons/bs";
 import { BiError } from 'react-icons/bi'
 import { RiDeleteBin6Line } from 'react-icons/ri'
 import { RiEdit2Line } from 'react-icons/ri'
-import { Box, Modal, Card, CardContent } from "@mui/material";
+import { Box, Modal, Card, CardContent, colors } from "@mui/material";
 
 
 export const BookingList = (props) => {
@@ -247,33 +247,40 @@ export const BookingList = (props) => {
     (<div></div>)
 
     const summaryStyle = {
-        width: '75%',
+        width: '60%',
         border: '0px solid black',
         margin: '10px auto 0px auto',
         boxShadow: '5px 3px 5px dimgrey',
         borderRadius: '5px',
         fontWeight: 'bolder',
         height: '25px',
-        background: 'aliceblue'
+        background: '#7D83FF',
+        color: "black",
+        textAlign: "center",
+        padding: 5
     }
 
     const typeStyle = {
         border: '0px solid black',
-        padding: 2,
+        padding: 5,
         boxShadow: '0px 2px 1px dimgrey',
         borderRadius: '5px',
-        background: 'aliceblue',
-        float: 'right'
+        background: '#7D83FF',
+        float: 'right',
+        fontWeight: "bolder",
+        color: "black"
     }
 
     const nameStyle = {
         border: '0px solid black',
-        padding: 2,
+        padding: 5,
         boxShadow: '0px 2px 1px dimgrey',
         borderRadius: '5px',
-        background: 'aliceblue',
+        background: '#7D83FF',
         float: 'left',
-        marginBottom: '10px'
+        marginBottom: '10px',
+        color: "black",
+        fontWeight: "bolder"
     }
 
     if(props.bookings.length < 1) {
@@ -287,7 +294,7 @@ export const BookingList = (props) => {
                     <div style={summaryStyle}>{props.bookings.length} {props.bookings.length > 1 ? 'bookings' : 'booking'} {countCustomers(props.bookings)} {countCustomers(props.bookings) > 1 ? 'customers' : 'customer'}</div>
                     {props.bookings.map(booking => {
                         return(
-                            <Card sx={{marginTop: 5}}>
+                            <Card sx={{margin: "auto", width: "80%", marginTop: 5, borderRadius: 5}}>
                                 <CardContent onClick={() => handleCustomerInfoClick(booking)}>
                                     <span style={{float: 'left'}}>{booking.booking_time}</span>
                                     <span style={typeStyle}>{booking.booking_type} </span>
@@ -297,7 +304,7 @@ export const BookingList = (props) => {
                                     <br/>
                                     <br/>
                                     <span style={nameStyle}>{booking.customer_name}</span>
-                                    <span style={{float: 'left', paddingTop: '4px', paddingLeft: '5px', color: 'red'}}>{booking.number_of_people} person</span>
+                                    <span style={{float: 'left', paddingTop: '4px', paddingLeft: '5px'}}>{booking.number_of_people} person</span>
                                     <span style={{float: 'right'}}>{booking.booking_date}</span>
                                     <br/>
                                     <br/>
@@ -306,14 +313,15 @@ export const BookingList = (props) => {
                                     <button 
                                         style={{
                                             margin: 10,
-                                            backgroundColor: 'darkred',
+                                            backgroundColor: '#590925',
                                             color: "white",
-                                            width: 80,
-                                            height: 25,
+                                            padding: 8,
+                                            width: 40,
+                                            // height: 25,
                                             border: 'none',
                                             borderRadius: 10,
                                             boxShadow: 'dimgrey 0px 2px 1px',
-                                            fontSize: '1.2em'
+                                            fontSize: '1em'
                                         }}
                                         onClick={() => {
                                             handleCustomerInfoClick(booking)
@@ -326,14 +334,15 @@ export const BookingList = (props) => {
                                     <button 
                                         style={{
                                             margin: 10,
-                                            backgroundColor: 'black',
-                                            color: "white",
-                                            width: 80,
-                                            height: 25,
+                                            backgroundColor: '#7D83FF',
+                                            color: "black",
+                                            padding: 8,
+                                            width: 40,
+                                            // height: 25,
                                             border: 'none',
                                             borderRadius: 10,
                                             boxShadow: 'dimgrey 0px 2px 1px',
-                                            fontSize: '1.2em'
+                                            fontSize: '1em'
                                         }}
                                         onClick={() => {
                                             handleCustomerInfoClick(booking)

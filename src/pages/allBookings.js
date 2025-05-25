@@ -1,6 +1,6 @@
-import { Box } from "@mui/system"
+import { Box, display, style, width } from "@mui/system"
 import axios from "../axios"
-import { Header } from "../components/Header"
+import { Header, PhoneHeader } from "../components/Header"
 import { Footer } from "../components/Footer"
 import { BookingList } from "../components/BookingsList"
 import { useNavigate, useParams } from "react-router-dom"
@@ -30,14 +30,20 @@ export const Recents = (props) => {
         })
     }, [])
 
+    console.log(window.innerWidth)
+
     return (
-        <>
-            <Header />
-            <Box style={{margin: '0px 20px 0 20px'}} >
+        <Box style={{display: "flex", flexDirection: "row", width: "100%"}}>
+            {
+                window.outerWidth < 500 ? 
+                <PhoneHeader/>
+                :
+                <Header/>
+            }
+            <Box style={{margin: '0px 20px 0 20px', width: "-webkit-fill-available"}} >
                 <BookingList bookings={bookings} token={token} />
             </Box>
-            <Footer />
-        </>
+        </Box>
 
     )
 }

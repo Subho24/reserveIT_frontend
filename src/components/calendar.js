@@ -69,6 +69,7 @@ export const CalendarWrapper = (props) => {
 
     const calendar = 
     <Calendar 
+    className={"myCustomCalendar"}
         value={currDate}
         onChange={handleChange} 
         tileContent=''             
@@ -85,6 +86,7 @@ export const CalendarWrapper = (props) => {
 
 
     return(
-        allBookings.length > 1 ? calendar : null
+        // allBookings.length > 1 ? calendar : null
+        calendar
     )
 }

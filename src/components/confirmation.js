@@ -16,7 +16,7 @@ const buttonStyle = {
 
 export const Confirmation = (props) => {
     const { companyId } = useParams();
-    const [bookingStatus, setBookingStatus ] = useState(null);
+    // const [bookingStatus, setBookingStatus ] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const [customerName, setCustomerName] = useState(null);
     const [customerPhone, setCustomerPhone] = useState(null);
@@ -33,7 +33,7 @@ export const Confirmation = (props) => {
     }
 
     const validateCustomerInfo = () => {
-        props.setBookingStatus('await');
+        //props.setBookingStatus('await');
         console.log(customerName, customerPhone, customerEmail, timeLenthAgreed, countryCode)       
         if(!customerName || !customerPhone || !customerEmail || !timeLenthAgreed) {
             alert('Vänligen fyll i fälten markerade med *')
@@ -56,6 +56,7 @@ export const Confirmation = (props) => {
     }
 
     const submitData = () => {
+        console.log("submited")
         axios.post('/api/bookings', {
             "company_id": companyId,
             "booking_type": props.selectedType,
@@ -94,7 +95,7 @@ export const Confirmation = (props) => {
         }
     }
 
-    const modalContent = bookingStatus === 'success' ?
+    const modalContent = props.bookingStatus === 'success' ?
     (
         <div className="modal">
             <h1>Booking confirmed</h1>

@@ -3,6 +3,7 @@ import { TypeForm } from '../components/typeForm';
 import { DateForm } from '../components/dateForm';
 import { TimeForm } from '../components/timeForm';
 import { BookingFooter } from '../components/BookingFooter'
+import { Footer } from '../components/Footer';
 import { Loading } from '../components/Loading';
 import { BsCheckCircle } from 'react-icons/bs'
 import { BiError } from 'react-icons/bi'
@@ -76,7 +77,7 @@ export function Edit(props) {
 
   useEffect(() => {
     if(selectedType !== '') {
-      bookingInfo.map(info => {
+      bookingInfo?.map(info => {
         if(info.booking_type === selectedType) {
           setPeopleArr(createArray(info.max_people))
           setTimeArr(getAvailableTimes(info.booking_type_start, info.booking_type_end))
@@ -166,7 +167,6 @@ export function Edit(props) {
             </main>
           )
         }
-        <BookingFooter />
       </>
     )
   }
